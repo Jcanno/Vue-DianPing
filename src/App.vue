@@ -1,20 +1,26 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="新的项目，仿照【大众点评网】"/>
+    <div id="nav">
+      
+    </div>
+    <router-view/>
+    <Footer></Footer>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
 
+<script>
+import Footer from './layout/Footer'
 export default {
   name: 'app',
+
   components: {
-    HelloWorld
+    Footer
   }
 }
 </script>
+
+
 
 <style>
 #app {
