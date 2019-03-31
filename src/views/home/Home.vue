@@ -7,6 +7,7 @@
     <Search class="search"></Search>
     <Swiper class="swiper"></Swiper>
     <Banner></Banner>
+    <Tabs></Tabs>
   </div>
 </template>
 
@@ -15,12 +16,14 @@
 import Search from './components/Search'
 import Swiper from './components/Swiper'
 import Banner from './components/Banner'
+import Tabs from './components/Tabs/Tabs'
 export default {
   name: 'home',
   components: {
     Search,
     Swiper,
-    Banner
+    Banner,
+    Tabs
   }
 }
 </script>
