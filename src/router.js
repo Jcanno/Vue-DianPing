@@ -17,7 +17,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/strategy/Strategy.vue')
+      component: () => import(/* webpackChunkName: "about" */ '@/views/strategy/Strategy.vue')
     },
     {
       path: '/follow',
@@ -25,7 +25,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/follow/Follow.vue')
+      component: () => import(/* webpackChunkName: "about" */ '@/views/follow/Follow.vue')
     },
     {
       path: '/my',
@@ -33,7 +33,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/my/My.vue')
+      component: () => import(/* webpackChunkName: "about" */ '@/views/my/My.vue')
     }
   ]
 })

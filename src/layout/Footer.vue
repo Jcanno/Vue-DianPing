@@ -22,7 +22,7 @@ import { Tabbar, TabbarItem } from 'vant';
 import Vue from 'vue'
 Vue.use(Tabbar).use(TabbarItem);
 export default {
-  name: 'foot',
+  name: 'footer',
 
   components:{
   },
