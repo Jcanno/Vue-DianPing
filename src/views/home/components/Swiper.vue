@@ -28,17 +28,16 @@
 // import * as types from '@/store/types';
 import { Swipe, SwipeItem, Icon } from 'vant';
 import Vue from 'vue'
-
-import food from '@/assets/images/food.png'
-import wedding from '@/assets/images/wedding.png'
-import eat from '@/assets/images/eat.png'
-import fun from '@/assets/images/fun.png'
-import hair from '@/assets/images/hair.png'
-import hotel from '@/assets/images/hotel.png'
-import travel from '@/assets/images/travel.png'
-import shop from '@/assets/images/shop.png'
-import movie from '@/assets/images/movie.png'
-import life from '@/assets/images/life.png'
+import food from '@/assets/swiper/food.png'
+import wedding from '@/assets/swiper/wedding.png'
+import eat from '@/assets/swiper/eat.png'
+import fun from '@/assets/swiper/fun.png'
+import hair from '@/assets/swiper/hair.png'
+import hotel from '@/assets/swiper/hotel.png'
+import travel from '@/assets/swiper/travel.png'
+import shop from '@/assets/swiper/shop.png'
+import movie from '@/assets/swiper/movie.png'
+import life from '@/assets/swiper/life.png'
 
 Vue.use(Swipe).use(SwipeItem).use(Icon);
 export default {
