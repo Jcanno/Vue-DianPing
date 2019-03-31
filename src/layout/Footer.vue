@@ -1,5 +1,5 @@
 <style lang='less' scoped>
-@import "./footer.less";
+@import "./Footer.less";
 </style>
 
 <template>

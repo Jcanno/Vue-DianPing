@@ -1,18 +1,20 @@
+<style lang='less' scoped>
+@import "./Home.less";
+</style>
+
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Search class="search"></Search>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '_c/HelloWorld.vue'
-
+import Search from './components/Search'
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    Search
   }
 }
 </script>
