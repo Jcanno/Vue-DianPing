@@ -9,9 +9,10 @@
       swipeable
       sticky
       animated
-      color="#FF6739">
-      <van-tab v-for="item in tabs" :key="item.name" :title="item.name" class="masonry">
-        <div class="item"> 
+      color="#FF6739"
+      >
+      <van-tab v-for="item in tabs" :key="item.name" :title="item.name" class="masonry" >
+        <div class="item" @click="onTurnToTab"> 
           <div class="item_content content-lar"> 
             <img :src="hashiqi1" alt="">
             <div class="desc">
@@ -252,7 +253,11 @@ export default {
     }
   },
 
-  methods: {},
+  methods: {
+    onTurnToTab(){
+      this.$router.push('tabDetail')
+    }
+  },
 
   computed: {},
 
