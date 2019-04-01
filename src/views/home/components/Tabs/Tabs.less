@@ -1,0 +1,91 @@
+.masonry {
+  -moz-column-count:2; /* Firefox */
+  -webkit-column-count:2; /* Safari 和 Chrome */
+  column-count:2;
+  -moz-column-gap: 10px;
+  -webkit-column-gap: 10px;
+  column-gap: 10px;
+  width: 100%;
+  margin:10px auto;
+  padding: 20px;
+  background: rgb(239, 237, 237);
+
+  .item {
+    margin-bottom: 10px;
+    -moz-page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    break-inside: avoid;
+    background: rgb(255, 255, 255);
+    border-radius: 7px;
+    overflow: hidden;
+
+    .content-lar {
+
+      img {
+        width: 100%;
+      }
+
+      .desc {
+        padding: 7px;
+
+        .title {
+          margin-block-start: 0em;
+          margin-block-end: 0em;
+          overflow: hidden;
+          text-overflow: clip;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-align: start;
+          font-size: 10px;
+          font-weight: bold;
+        }
+
+        .info {
+          display: flex;
+          position: relative;
+          align-items: center;
+          // text-align: start;
+          margin-top: 10px;
+
+          .avatar {
+            display: inline-block;
+            margin-right: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+          }
+
+          .username {
+            display: inline-block;
+            width: 60%;
+            font-size: 2px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+
+          .good {
+            
+            position: absolute;
+            right: 0;
+
+            .count {
+              display: inline-block;
+              margin-left: 5px;
+              font-size: 5px
+            }
+          }
+        }
+      }
+    }
+
+    .content-sma {
+      height: 50px;
+    }
+
+    .content-mid {
+      height: 100px;
+    }
+  }
+}
