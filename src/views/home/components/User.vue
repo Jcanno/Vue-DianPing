@@ -4,19 +4,7 @@
 
 <template>
   <div>
-    <div class="user-info">
-      <img class="avatar" :src="avatar" alt="">
-      <div class="username-date">
-        <p>Kiko不能再胖了</p>
-        <p class="date">3月29日  12:03</p>
-      </div>
-      <van-button
-        size="mini" 
-        round 
-        class="add-button"
-        >+ 关注
-      </van-button>
-    </div>
+    <UserInfo></UserInfo>
     <div class="comment">
       <p>
         大众点评网于2003年4月成立于上海。
@@ -33,21 +21,19 @@
         喜获“年度十大最受欢迎APP”。同时，“大众点评”也是唯一一款获评该奖的美食健康类APP。
       </p>
     </div>
-    <div class="rate">
-      <span>打分</span>
-      <van-rate 
-        v-model="rate"
-        color="#FF6739"
-        :size="10" />
-    </div>
+    <Rate />
+    <Comment></Comment>
   </div>
 </template>
 
 <script>
 import hashiqi1 from '@/assets/test/hashiqi1.jpg'
-import { Button, Rate } from 'vant';
+import Comment from './Comment'
+import Rate from '_c/Rate'
+import UserInfo from '_c/UserInfo/UserInfo'
+import { Button } from 'vant';
 import Vue from 'vue'
-Vue.use(Button).use(Rate);
+Vue.use(Button);
 export default {
   name: 'user',
 
@@ -62,7 +48,11 @@ export default {
     }
   },
 
-  components:{},
+  components:{
+    Comment,
+    UserInfo,
+    Rate
+  },
 
   data () {
     return {

@@ -44,7 +44,7 @@ export default {
   name: 'tabDetail',
 
   components:{
-    User
+    User,
   },
 
   data () {
