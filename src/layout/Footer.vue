@@ -7,7 +7,6 @@
     <van-tabbar 
       v-model="active"
       active-color="#FF6739"
-      fixed
     >
       <van-tabbar-item icon="friends" to="/">首页</van-tabbar-item>
       <van-tabbar-item icon="column" to="/strategy">攻略</van-tabbar-item>

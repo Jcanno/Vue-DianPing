@@ -24,7 +24,7 @@
       name="arrow-left" 
       class="back-button" 
       color="#fff" 
-      size="20px" 
+      size=20 
       @click="onClickBack"/>
     <User class="user"></User>
   </div>

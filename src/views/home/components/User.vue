@@ -38,7 +38,7 @@
       <van-rate 
         v-model="rate"
         color="#FF6739"
-        size=10 />
+        :size="10" />
     </div>
   </div>
 </template>
