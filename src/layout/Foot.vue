@@ -1,5 +1,5 @@
 <style lang='less' scoped>
-@import "./Footer.less";
+@import "./Foot.less";
 </style>
 
 <template>
@@ -21,7 +21,7 @@ import { Tabbar, TabbarItem } from 'vant';
 import Vue from 'vue'
 Vue.use(Tabbar).use(TabbarItem);
 export default {
-  name: 'footer',
+  name: 'foot',
 
   components:{
   },

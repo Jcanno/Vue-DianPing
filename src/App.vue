@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <router-view style="margin-bottom:50px"/>
-    <Footer></Footer>
+    <Foot></Foot>
   </div>
 </template>
 
 
 <script>
-import Footer from './layout/Footer'
+import Foot from './layout/Foot'
 export default {
   name: 'app',
 
   components: {
-    Footer
+    Foot
   }
 }
 </script>
