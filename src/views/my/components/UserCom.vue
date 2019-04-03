@@ -31,7 +31,7 @@ export default {
   props: {
     isLogin: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
 
