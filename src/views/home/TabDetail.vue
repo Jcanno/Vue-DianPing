@@ -6,8 +6,7 @@
   <div>
     <van-swipe
       @change="onChange"
-      :height="height"
-      class="clear-margin">
+      :height="height">
       <van-swipe-item 
         v-for="item in images" 
         :key="item"

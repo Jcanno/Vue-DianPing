@@ -1,5 +1,35 @@
+<style lang='less' scoped>
+@import './My.less';
+</style>
+
 <template>
-  <div class="my">
-    <h1>This is an my page</h1>
+  <div >
+    <UserCom class="user-com"></UserCom>
   </div>
 </template>
+
+<script>
+import UserCom from './components/UserCom'
+
+export default {
+  name: 'my',
+
+  components:{
+    UserCom,
+  },
+
+  data () {
+    return {
+    }
+  },
+
+  methods: {},
+
+  computed: {},
+
+  mounted(){
+    
+  }
+}
+</script>
+
