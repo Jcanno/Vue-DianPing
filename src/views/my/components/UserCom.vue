@@ -10,7 +10,7 @@
       <p><span class="divide">粉丝  0  </span><span>关注  0</span></p>
     </div>   
   </div>
-  <div class="user-login" v-else>
+  <div class="user-login" v-else @click="onLogin">
     <Avatar :size=50 class="avatar"></Avatar>
     <div class="user-info">
       <p class="tap-login">点击登录</p>
@@ -40,7 +40,11 @@ export default {
     }
   },
 
-  methods: {},
+  methods: {
+    onLogin(){
+      this.$emit('onPopLogin');
+    }
+  },
 
   computed: {},
 

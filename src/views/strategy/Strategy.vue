@@ -9,17 +9,21 @@
       <p>温州必体验</p>
       <img  class="strategy-item-img" :src="hashiqi1" alt="">
     </div>
+    <StrategyItem></StrategyItem>
   </div>
   
 </template>
 
 <script>
 import city from '@/assets/city.jpg'
+import StrategyItem from './components/StrategyItem'
 import hashiqi1 from '@/assets/test/hashiqi1.jpg'
 export default {
   name: 'strategy',
 
-  components:{},
+  components:{
+    StrategyItem
+  },
 
   data () {
     return {

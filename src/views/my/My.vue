@@ -4,28 +4,54 @@
 
 <template>
   <div >
-    <UserCom class="user-com"></UserCom>
+    <UserCom 
+      class="user-com"
+      @onPopLogin="handlePopLogin"
+    >
+    </UserCom>
     <UserTab></UserTab>
+    <van-popup 
+      v-model="show" 
+      position="bottom" 
+      :overlay="true"
+
+    >
+      <LoginPage  @onClosePop="handleClosePop"/>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import UserCom from './components/UserCom'
 import UserTab from './components/UserTab'
+import LoginPage from './LoginPage'
+import { Popup } from 'vant';
+import Vue from 'vue';
+Vue.use(Popup);
 export default {
   name: 'my',
 
   components:{
     UserCom,
-    UserTab
+    UserTab,
+    LoginPage
   },
 
   data () {
     return {
+      show: false
     }
   },
 
-  methods: {},
+  methods: {
+    handlePopLogin(){
+      this.show = true;
+    },
+    handleClosePop(){
+      this.show = false;
+    }
+  },
+  
 
   computed: {},
 
