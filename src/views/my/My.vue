@@ -10,21 +10,13 @@
     >
     </UserCom>
     <UserTab></UserTab>
-    <van-popup 
-      v-model="show" 
-      position="bottom" 
-      :overlay="true"
-
-    >
-      <LoginPage  @onClosePop="handleClosePop"/>
-    </van-popup>
+    <!-- <LoginPage :show=show @onClosePop="handleClosePop"/> -->
   </div>
 </template>
 
 <script>
 import UserCom from './components/UserCom'
 import UserTab from './components/UserTab'
-import LoginPage from './LoginPage'
 import { Popup } from 'vant';
 import Vue from 'vue';
 Vue.use(Popup);
@@ -34,7 +26,6 @@ export default {
   components:{
     UserCom,
     UserTab,
-    LoginPage
   },
 
   data () {
@@ -44,12 +35,15 @@ export default {
   },
 
   methods: {
+    // handlePopLogin(){
+    //   this.show = true;
+    // },
+    // handleClosePop(){
+    //   this.show = false;
+    // }
     handlePopLogin(){
-      this.show = true;
+      this.$router.push('/loginPage')
     },
-    handleClosePop(){
-      this.show = false;
-    }
   },
   
 
