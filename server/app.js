@@ -1,6 +1,19 @@
 const express = require("express")
 const app = express()
 const port = process.env.PORT || 3000
+const bodyParser = require("body-parser")
+const db = require('./db')
+
+db.authenticate().then(() => {
+  console.log('数据库连接成功！');
+}).catch( err => {
+  console.error('数据库连接失败！',err);
+})
+
+// 使用body-parser
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
 
 
 app.all("*", function(req, res, next){
