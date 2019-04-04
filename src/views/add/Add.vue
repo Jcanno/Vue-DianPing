@@ -4,35 +4,40 @@
 
 <template>
   <div>
-    <!-- <van-popup 
+    <van-popup 
       v-model="show" 
       position="bottom" 
       :overlay="true"
 
     >
-      <LoginPage  @onClosePop="handleClosePop"/>
-    </van-popup> -->
-    <p>123456</p>
+      <Nav @onPublish="handlePublish"></Nav>
+    </van-popup>
   </div>
 </template>
 
 <script>
-import { Popup } from 'vant';
+import Nav from './components/Nav'
+import { Popup, } from 'vant';
 import Vue from 'vue';
 Vue.use(Popup);
 export default {
   name: 'add',
 
   components:{
-    show: false
+    Nav
   },
 
   data () {
     return {
+      show: false
     }
   },
 
-  methods: {},
+  methods: {
+    handlePublish(){
+      
+    }
+  },
 
   computed: {},
 
