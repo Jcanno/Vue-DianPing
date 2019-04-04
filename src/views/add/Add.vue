@@ -15,6 +15,14 @@
       </Nav>
 
       <van-field 
+        v-model="title" 
+        placeholder="输入标题..."
+        class="title" 
+      >
+        <span slot="label" class="label">标题</span>
+      </van-field>
+
+      <van-field 
         v-model="comment" 
         placeholder="说说你此刻的感受吧..."
         class="comment" 
@@ -72,7 +80,8 @@ export default {
   data () {
     return {
       show: false,
-      comment: ""
+      comment: "",
+      title: ""
     }
   },
 
