@@ -13,10 +13,32 @@
     <component 
       :is="current"
       @onLogin="handleLogin"
+      @onRegister="handleRegister"
     >
     </component>
-    <p v-if="this.current == this.Login" class="registerTip">没有账号？<span @click="transRegister">注册</span> 一个！</p>
-    <p v-else class="loginTip">点击<span @click="transLogin">登录</span></p>
+    <p 
+      v-if="this.current == this.Login" 
+      class="registerTip"
+    >
+      没有账号？
+      <span 
+        @click="transRegister"
+      >
+        注册
+      </span> 
+      一个！
+    </p>
+    <p 
+      v-else 
+      class="loginTip"
+    >
+      已有账号？点击
+      <span 
+        @click="transLogin"
+      >
+        登录！
+      </span>
+    </p>
   </div>
 </template>
 
@@ -53,7 +75,9 @@ export default {
       this.current = Login;
     },
     handleLogin(data){
-      console.log(data);
+      
+    },
+    handleRegister(data){
       
     }
   },

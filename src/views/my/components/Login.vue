@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import { Field, Toast } from 'vant';
+import { Field, Toast, Button } from 'vant';
 import Vue from 'vue';
-Vue.use(Field).use(Toast);
+Vue.use(Field).use(Toast).use(Button);
 export default {
   name: 'login',
 
