@@ -10,7 +10,6 @@
     >
     </UserCom>
     <UserTab></UserTab>
-    <!-- <LoginPage :show=show @onClosePop="handleClosePop"/> -->
   </div>
 </template>
 

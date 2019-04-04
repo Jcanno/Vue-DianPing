@@ -20,6 +20,7 @@
         :is="current"
         @onLogin="handleLogin"
         @onRegister="handleRegister"
+        class="com"
       />
       <p 
         v-if="this.current == this.Login" 
