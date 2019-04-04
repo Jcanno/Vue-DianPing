@@ -16,7 +16,7 @@
 import Search from './components/Search'
 import Swiper from './components/Swiper'
 import Banner from './components/Banner'
-import Tabs from './components/Tabs/Tabs'
+import Tabs from './components/Tabs'
 export default {
   name: 'home',
   components: {
