@@ -28,7 +28,6 @@
         class="comment" 
       />
 
-
       <div class="upload">
         <van-row guttar="10">
           <van-col span="6" v-for="item in images" :key="item" >
@@ -45,18 +44,17 @@
           </van-col>
         </van-row>
       </div>
-      
-
     </van-popup>
   </div>
 </template>
 
 <script>
 import { upload } from '@/api/upload'
+import { comment } from '@/api/comment'
 import Nav from './components/Nav'
-import { Popup, Field, Uploader, Row, Col, ImagePreview } from 'vant';
+import { Popup, Field, Uploader, Row, Col, ImagePreview, Toast } from 'vant';
 import Vue from 'vue';
-Vue.use(Popup).use(Field).use(Uploader).use(Row).use(Col);
+Vue.use(Popup).use(Field).use(Uploader).use(Row).use(Col).use(Toast);
 export default {
   name: 'add',
 
@@ -78,7 +76,21 @@ export default {
 
   methods: {
     handlePublish(){
-
+      if(this.comment == "" || this.title == "" || this.images.length == 0){
+        Toast('请填写完整评论信息!')
+      }else{
+        let userid = this.$store.state.user.user.userid;
+        let data = {
+          title: this.title,
+          content: this.comment,
+          pics: this.images.join(","),
+          userid
+        }
+        comment(data).then(() => {
+          Toast('发表成功~')
+          this.$router.push('/')
+        })
+      }
     },
     onRead(file){
       let data = new FormData();
