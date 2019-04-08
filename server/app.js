@@ -4,6 +4,7 @@ const port = process.env.PORT || 3000
 const bodyParser = require("body-parser")
 const db = require('./db')
 const Fan = require('./models/Fans')
+const Comment = require('./models/Comment')
 const User = require('./models/User')
 const bcrypt = require("bcrypt")
 const path = require('path')
@@ -42,6 +43,8 @@ function initModels(){
                 username: 'Mike',
                 password: hash,
                 nickname: 'Mike'
+              }).then(() => {
+                Comment.sync({force: true})
               })
           });
         });
@@ -50,7 +53,7 @@ function initModels(){
   })
 
 }
-
+// db.sync()
 initModels()
 
 
@@ -85,8 +88,10 @@ app.all("*", function(req, res, next){
 })
 
 const user = require('./routes/user')
-
+const comment = require('./routes/comment')
 app.use('/user', user);
+app.use('/comment', comment);
+
 
 app.use('/static', express.static(path.join(__dirname, 'files')))
 
