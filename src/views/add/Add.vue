@@ -35,8 +35,12 @@
             <img :src="item" @click="onCheakPhoto(item)" alt="">
           </van-col>
           <van-col span="6">
-            <van-uploader :after-read="onRead" class="upload-button">
-              <van-icon name="photograph" size="25px"/>
+            <van-uploader 
+              :after-read="onRead" 
+              class="upload-button"
+              multiple
+            >
+              <van-icon name="photograph" size="30px"/>
             </van-uploader>
           </van-col>
         </van-row>
@@ -48,11 +52,7 @@
 </template>
 
 <script>
-import hashiqi1 from '@/assets/test/hashiqi1.jpg'
-import hashiqi2 from '@/assets/test/hashiqi2.jpg'
-import hashiqi3 from '@/assets/test/hashiqi3.jpg'
-import hashiqi4 from '@/assets/test/hashiqi4.jpg'
-import hashiqi5 from '@/assets/test/hashiqi5.jpg'
+import { upload } from '@/api/upload'
 import Nav from './components/Nav'
 import { Popup, Field, Uploader, Row, Col, ImagePreview } from 'vant';
 import Vue from 'vue';
@@ -65,23 +65,14 @@ export default {
   },
 
   props:{
-    images: {
-      type: Array,
-      default: () => [
-        hashiqi1,
-        hashiqi2,
-        hashiqi3,
-        hashiqi4,
-        hashiqi5,
-      ]
-    }
   },
 
   data () {
     return {
       show: false,
       comment: "",
-      title: ""
+      title: "",
+      images: []
     }
   },
 
@@ -89,8 +80,20 @@ export default {
     handlePublish(){
 
     },
-    onRead(){
-
+    onRead(file){
+      let data = new FormData();
+      if(Array.isArray(file)){
+        for(let item of file){
+          data.append('file', item.file);
+        }
+      }else{
+        data.append('file', file);
+      }
+      
+      upload(data).then(res => {
+        this.images = [...this.images, ...res.data]
+      })
+      
     },
     onCheakPhoto(item){
       let current = this.images.indexOf(item)

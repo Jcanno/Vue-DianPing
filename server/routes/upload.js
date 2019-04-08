@@ -15,14 +15,15 @@ const storage = multer.diskStorage({
 })
  
 const upload = multer({ storage})
-// const upload = multer({ dest: 'server/uploads/'})
 
-router.post('/upload', upload.single('file'), (req, res) => {
-  console.log(req.body);
-  
+router.post('/upload', upload.array('file', 9), (req, res) => {
   // 文件储存路径
-  let file = req.file;
-  res.json({url: "http://127.0.0.1:3000/uploads" + file.filename});
+  let files = req.files;
+  let arr = [];
+  for(let file of files){
+    arr.push("http://127.0.0.1:3000/upload/" + file.filename)
+  }
+  res.json(arr)
 })
 
 module.exports = router
