@@ -87,13 +87,16 @@ app.all("*", function(req, res, next){
   next()
 })
 
-const user = require('./routes/user')
-const comment = require('./routes/comment')
+const user = require('./routes/user');
+const comment = require('./routes/comment');
+const upload = require('./routes/upload');
+app.use('/', upload);
 app.use('/user', user);
-app.use('/comment', comment);
+app.use('/', comment);
 
 
 app.use('/static', express.static(path.join(__dirname, 'files')))
+app.use('/upload', express.static(path.join(__dirname, 'uploads')))
 
 app.listen(port, () => {
   console.log("服务已启动，监听端口3000!");
