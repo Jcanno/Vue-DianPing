@@ -23,7 +23,20 @@
             />
           </van-uploader>
         </van-cell>
-        <van-cell title="单元格" value="内容" label="描述信息" />
+        <van-cell title="昵称" >
+          <van-field
+            v-model="nickname"
+            
+            placeholder="请输入昵称"
+          >
+            <van-button 
+              slot="button" 
+              size="small" 
+              type="primary"
+              @click="onSave"
+            >保存</van-button>
+          </van-field>
+        </van-cell>
       </van-cell-group>
     </van-popup>
   </div>
@@ -34,9 +47,9 @@ import * as types from '@/store/types';
 import { uploadSingle } from '@/api/upload'
 import { userInfo } from '@/api/user'
 import Avatar from '_c/UserInfo/Avatar'
-import { Cell, CellGroup, Popup, Uploader, Toast } from 'vant';
+import { Cell, CellGroup, Popup, Uploader, Toast, Field } from 'vant';
 import Vue from 'vue';
-Vue.use(Cell).use(CellGroup).use(Popup).use(Uploader).use(Toast);
+Vue.use(Cell).use(CellGroup).use(Popup).use(Uploader).use(Toast).use(Field);
 export default {
   name: 'setting',
 
@@ -46,11 +59,23 @@ export default {
 
   data () {
     return {
-      show: false
+      show: false,
+      nickname: ""
     }
   },
 
   methods: {
+    onSave(){
+      if(this.nickname == ""){
+        Toast('请输入昵称');
+      }else{
+        let id = this.$store.state.user.user.userid;
+        userInfo({nickname: this.nickname,id}).then(() => {
+          Toast('更新成功!');
+          this.$store.dispatch(types.AUserInfo, id)
+        })
+      }
+    },
     onRead(file){
       let id = this.$store.state.user.user.userid;
       let data = new FormData();
@@ -74,7 +99,7 @@ export default {
   computed: {
     user(){
       return this.$store.state.user.user;
-    }
+    },
   },
 
   mounted(){
