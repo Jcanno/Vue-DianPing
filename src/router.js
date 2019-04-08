@@ -65,6 +65,21 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '@/views/my/LoginPage.vue')
+  },
+  {
+    path: '/setting',
+    name: 'setting',
+    beforeEnter: (to, from, next) => {
+      if(store.state.user.isLogin){
+        next()
+      }else{
+        next('loginPage')
+      }
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '@/views/my/Setting.vue')
   }
 ]
 

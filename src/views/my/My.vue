@@ -4,6 +4,18 @@
 
 <template>
   <div >
+    <van-nav-bar
+      right-text="按钮"
+      @click-right="onSetting"
+    >
+      <van-icon 
+        slot="right" 
+        name="setting" 
+        color="#FF6739"
+        size="30px"
+      >
+      </van-icon>
+    </van-nav-bar>
     <UserCom 
       class="user-com"
       @onPopLogin="handlePopLogin"
@@ -18,9 +30,9 @@
 <script>
 import UserCom from './components/UserCom'
 import UserTab from './components/UserTab'
-import { Popup } from 'vant';
+import { Popup, NavBar, Icon } from 'vant';
 import Vue from 'vue';
-Vue.use(Popup);
+Vue.use(Popup).use(NavBar).use(Icon);
 export default {
   name: 'my',
 
@@ -42,8 +54,11 @@ export default {
     // handleClosePop(){
     //   this.show = false;
     // }
+    onSetting(){
+      this.$router.push('/setting');
+    },
     handlePopLogin(){
-      this.$router.push('/loginPage')
+      this.$router.push('/loginPage');
     },
   },
   

@@ -11,8 +11,7 @@
     >
       <Nav 
         @onPublish="handlePublish"
-      >
-      </Nav>
+      />
 
       <van-field 
         v-model="title" 
@@ -49,7 +48,7 @@
 </template>
 
 <script>
-import { upload } from '@/api/upload'
+import { upload, uploadSingle } from '@/api/upload'
 import { comment } from '@/api/comment'
 import Nav from './components/Nav'
 import { Popup, Field, Uploader, Row, Col, ImagePreview, Toast } from 'vant';
@@ -98,14 +97,15 @@ export default {
         for(let item of file){
           data.append('file', item.file);
         }
+        upload(data).then(res => {
+          this.images = [...this.images, ...res.data]
+        })
       }else{
-        data.append('file', file);
+        data.append('file', file.file);
+        uploadSingle(data).then(res => {
+          this.images.push(res.data.url);
+        })
       }
-      
-      upload(data).then(res => {
-        this.images = [...this.images, ...res.data]
-      })
-      
     },
     onCheakPhoto(item){
       let current = this.images.indexOf(item)

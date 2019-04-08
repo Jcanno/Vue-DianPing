@@ -26,4 +26,13 @@ router.post('/upload', upload.array('file', 9), (req, res) => {
   res.json(arr)
 })
 
+router.post('/uploadSingle', upload.single('file'), (req, res) => {
+  // 文件储存路径
+  let file = req.file;
+  console.log(file);
+  
+  res.json({url: "http://127.0.0.1:3000/upload/" + file.filename})
+})
+
+
 module.exports = router
