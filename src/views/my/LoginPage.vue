@@ -50,11 +50,12 @@
 </template>
 
 <script>
+import * as types from '@/store/types'
 import Login from './components/Login'
 import Register from './components/Register'
-import { Icon, Button, Popup } from 'vant';
+import { Icon, Button, Popup, Toast } from 'vant';
 import Vue from 'vue';
-Vue.use(Icon).use(Button).use(Popup);
+Vue.use(Icon).use(Button).use(Popup).use(Toast);
 export default {
   name: 'loginpage',
 
@@ -86,10 +87,14 @@ export default {
       this.current = Login;
     },
     handleLogin(data){
-      
+      this.$store.dispatch(types.ALogin, data).then(() => {
+        Toast('登录成功!')
+      })
     },
     handleRegister(data){
-      
+      this.$store.dispatch(types.ARegister, data).then(() => {
+        Toast('注册成功!')
+      })
     }
   },
 

@@ -22,7 +22,7 @@ export default {
    * @description api请求基础路径
    */
   baseUrl: {
-    dev: 'http://test.xruida.com/admin/',
+    dev: 'http://127.0.0.1:3000/',
     pro: 'https://api.xruida.com/admin/'
   }
 };
