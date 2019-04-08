@@ -4,9 +4,13 @@
 
 <template>
   <div class="user-com" v-if="isLogin">
-    <Avatar :size=50 class="avatar"></Avatar>
+    <Avatar 
+      :size=50 
+      class="avatar"
+      :image="user.avatar"
+    />
     <div class="user-info">
-      <p class="username">Kiko不能再胖了</p>
+      <p class="username">{{user.nickname}}</p>
       <p><span class="divide">粉丝  0  </span><span>关注  0</span></p>
     </div>   
   </div>
@@ -32,6 +36,9 @@ export default {
     isLogin: {
       type: Boolean,
       default: false
+    },
+    user: {
+      type: Object,
     }
   },
 
@@ -46,7 +53,12 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    image(){
+      return this.$store.state.user.user.avatar
+    },
+    
+  },
 
   mounted(){
   }

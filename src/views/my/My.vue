@@ -7,8 +7,10 @@
     <UserCom 
       class="user-com"
       @onPopLogin="handlePopLogin"
-    >
-    </UserCom>
+      :isLogin="isLogin"
+      :user="user"
+    />
+    
     <UserTab></UserTab>
   </div>
 </template>
@@ -46,7 +48,14 @@ export default {
   },
   
 
-  computed: {},
+  computed: {
+    isLogin(){
+      return this.$store.state.user.isLogin;
+    },
+    user(){
+      return this.$store.state.user.user;
+    }
+  },
 
   mounted(){
     

@@ -89,7 +89,8 @@ export default {
     handleLogin(data){
       this.$store.dispatch(types.ALogin, data).then(() => {
         Toast('登录成功!')
-      })
+        this.$router.push('/my')
+      }); 
     },
     handleRegister(data){
       this.$store.dispatch(types.ARegister, data).then(() => {

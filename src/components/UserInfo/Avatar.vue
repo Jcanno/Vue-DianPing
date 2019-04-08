@@ -3,7 +3,11 @@
 </style>
 
 <template>
-  <img :src="image" alt="" :style="styleObject">
+  <img 
+    :src="image" 
+    alt="" 
+    :style="styleObject"
+  />
 </template>
 
 <script>
@@ -14,7 +18,7 @@ export default {
   props:{
     image:{
       type: String,
-      default: hashiqi1
+      // default: "http://127.0.0.1:3000/static/hashiqi1.jpg"
     },
     size:{
       type: Number,

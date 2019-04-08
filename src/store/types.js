@@ -12,4 +12,5 @@ export const ARegister = 'aregister'
 *mutations 
 */
 export const MLogin = 'mlogin'
+export const MLoginState = 'mloginstate'
 export const MRegister = 'mregister'

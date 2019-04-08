@@ -4,7 +4,8 @@ import { login, register } from '@/api/user'
 
 export default {
   state: {
-    user: []
+    user: {},
+    isLogin: false
   },
 
   getters: {
@@ -12,6 +13,12 @@ export default {
   },
 
   mutations: {
+    /**
+     * 修改登录状态
+     */
+    [types.MLoginState](state, access) {
+      state.isLogin = access;
+    },
     /**
      * 填充数据
      */
@@ -24,10 +31,12 @@ export default {
     [types.ALogin]({commit}, data){
       return new Promise( (resolve, reject) => {
         login(data).then(res => {
-          commit(types.MLogin, res);
-          resolve(res)
+          commit(types.MLogin, res.data);
+          commit(types.MLoginState, true);
+          resolve(res.data)
         }).catch(err => {
-          commit(types.MLogin, [])
+          commit(types.MLogin, []);
+          commit(types.MLoginState, false);
           reject(err)
         })
       })

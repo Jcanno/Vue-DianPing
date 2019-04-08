@@ -47,7 +47,7 @@ const routes = [
     path: '/add',
     name: 'add',
     beforeEnter: (to, from, next) => {
-      if(store.state.isLogin){
+      if(store.state.user.isLogin){
         next()
       }else{
         next('loginPage')
