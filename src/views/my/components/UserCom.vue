@@ -15,7 +15,7 @@
     </div>   
   </div>
   <div class="user-login" v-else @click="onLogin">
-    <Avatar :size=50 class="avatar"></Avatar>
+    <Avatar :size=50 :image="LoginImage" class="avatar"></Avatar>
     <div class="user-info">
       <p class="tap-login">点击登录</p>
       <p class="tip-login">登录更精彩</p>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import LoginImage from '@/assets/login.jpg'
 import Avatar from '_c/UserInfo/Avatar'
 export default {
   name: 'usercom',
@@ -44,6 +45,7 @@ export default {
 
   data () {
     return {
+      LoginImage
     }
   },
 
