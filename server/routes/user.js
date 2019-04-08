@@ -57,4 +57,36 @@ router.post('/login', (req, res) => {
 })
 
 
+router.patch('/userinfo/:id', (req, res) => {
+  const userid = req.params.id;
+  User.findOne({
+    where: {
+      userid
+    }
+  }).then(user => {
+    if(!user){
+      return res.status(404).json({msg: '用户不存在！'})
+    }else{
+      user.update(req.body).then(() => {
+        res.status(200).json()
+      })
+    }
+  })
+})
+
+router.get('/userinfo/:id', (req, res) => {
+  const userid = req.params.id;
+  User.findOne({
+    where: {
+      userid
+    }
+  }).then(user => {
+    if(!user){
+      return res.status(404).json({msg: '用户不存在！'})
+    }else{
+      res.status(200).json(user);
+    }
+  })
+})
+
 module.exports = router

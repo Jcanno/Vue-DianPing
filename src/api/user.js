@@ -21,3 +21,24 @@ export const register = (data) =>{
       data
   })
 }
+
+/**
+ * 更新用户信息
+ */
+export const userInfo = (data) =>{
+    return axios.request({
+        url: `user/userinfo/${data.id}`,
+        method: 'patch',
+        data
+    })
+  }
+
+/**
+ * 获取用户信息
+ */
+export const getUserInfo = (id) =>{
+    return axios.request({
+        url: `user/userinfo/${id}`,
+        method: 'get',
+    })
+  }

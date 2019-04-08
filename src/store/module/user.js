@@ -1,5 +1,5 @@
 import * as types from '../types'
-import { login, register } from '@/api/user'
+import { login, register, getUserInfo } from '@/api/user'
 
 
 export default {
@@ -22,20 +22,31 @@ export default {
     /**
      * 填充数据
      */
-    [types.MLogin](state, access) {
+    [types.MUserInfo](state, access) {
       state.user = access;
     },
   },
 
   actions: {
+    [types.AUserInfo]({commit}, id){
+      return new Promise( (resolve, reject) => {
+        getUserInfo(id).then(res => {
+          commit(types.MUserInfo, res.data);
+          resolve(res.data)
+        }).catch(err => {
+          commit(types.MUserInfo, {});
+          reject(err)
+        })
+      })
+    },
     [types.ALogin]({commit}, data){
       return new Promise( (resolve, reject) => {
         login(data).then(res => {
-          commit(types.MLogin, res.data);
+          commit(types.MUserInfo, res.data);
           commit(types.MLoginState, true);
           resolve(res.data)
         }).catch(err => {
-          commit(types.MLogin, []);
+          commit(types.MUserInfo, {});
           commit(types.MLoginState, false);
           reject(err)
         })

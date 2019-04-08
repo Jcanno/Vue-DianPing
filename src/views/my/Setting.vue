@@ -30,11 +30,13 @@
 </template>
 
 <script>
-// import * as types from '@/store/types';
+import * as types from '@/store/types';
+import { uploadSingle } from '@/api/upload'
+import { userInfo } from '@/api/user'
 import Avatar from '_c/UserInfo/Avatar'
-import { Cell, CellGroup, Popup, Uploader } from 'vant';
+import { Cell, CellGroup, Popup, Uploader, Toast } from 'vant';
 import Vue from 'vue';
-Vue.use(Cell).use(CellGroup).use(Popup).use(Uploader);
+Vue.use(Cell).use(CellGroup).use(Popup).use(Uploader).use(Toast);
 export default {
   name: 'setting',
 
@@ -50,7 +52,19 @@ export default {
 
   methods: {
     onRead(file){
-      
+      let id = this.$store.state.user.user.userid;
+      let data = new FormData();
+      data.append('file', file.file);
+      uploadSingle(data).then(res => {        
+        let data = {
+          id,
+          avatar: res.data.url
+        }
+        userInfo(data).then(() => {
+          Toast('更新成功!');
+          this.$store.dispatch(types.AUserInfo, id)
+        })
+      })
     },
     closePop(){
       this.$router.go(-1)
