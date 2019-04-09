@@ -37,6 +37,14 @@
             >保存</van-button>
           </van-field>
         </van-cell>
+        <van-cell >
+          <van-button 
+            slot="title" 
+            size="small" 
+            class="logout-button"
+            @click="onLogout"
+          >退出登录</van-button>
+        </van-cell>
       </van-cell-group>
     </van-popup>
   </div>
@@ -65,6 +73,11 @@ export default {
   },
 
   methods: {
+    onLogout(){
+      this.$store.commit(types.MLoginState, false);
+      this.$store.commit(types.MUserInfo, {});
+      this.$router.go(-1);
+    },
     onSave(){
       if(this.nickname == ""){
         Toast('请输入昵称');
