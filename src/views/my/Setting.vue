@@ -82,25 +82,23 @@ export default {
       if(this.nickname == ""){
         Toast('请输入昵称');
       }else{
-        let id = this.$store.state.user.user.userid;
-        userInfo({nickname: this.nickname,id}).then(() => {
+        userInfo({nickname: this.nickname,id: this.$store.getters.guserid}).then(() => {
           Toast('更新成功!');
-          this.$store.dispatch(types.AUserInfo, id)
+          this.$store.dispatch(types.AUserInfo)
         })
       }
     },
     onRead(file){
-      let id = this.$store.state.user.user.userid;
       let data = new FormData();
       data.append('file', file.file);
       uploadSingle(data).then(res => {        
         let data = {
-          id,
+          id: this.$store.getters.guserid,
           avatar: res.data.url
         }
         userInfo(data).then(() => {
           Toast('更新成功!');
-          this.$store.dispatch(types.AUserInfo, id)
+          this.$store.dispatch(types.AUserInfo)
         })
       })
     },

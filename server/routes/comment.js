@@ -25,17 +25,6 @@ router.post('/comments/:id', (req, res) => {
           res.status(201).json(comment);
         })
       })
-      
-      // Comments.upsert({
-      //   userid: userid,
-      //   title: req.body.title,
-      //   content: req.body.content,
-      //   pics: req.body.pics,
-      // }).then(comment => {
-      //   res.status(201).json(comment);
-      // }).catch(err => {
-      //   console.log(err);
-      // })
     }
   })
 })
@@ -44,7 +33,9 @@ router.post('/comments/:id', (req, res) => {
 // 根据评论表筛选用户，去重后关联查询用户评论数据
 router.get('/comments/:id', (req, res) => {
   // console.log(req.body);
-  const { id, offset, limit } = req.params;
+  const { id, } = req.params;
+  const { offset, limit } = req.query;
+  
   Comments.findAll({}).then(comments => {
     if(!comments.length){
       res.status(404).json({msg: '暂无评论!'});
@@ -54,6 +45,7 @@ router.get('/comments/:id', (req, res) => {
         idArr.push(item.userid);
       }
       let arr = [...new Set(idArr)];
+
       User.findAll({
         where: {
           userid: {
@@ -61,8 +53,8 @@ router.get('/comments/:id', (req, res) => {
             [Op.in]: arr
           },
         },
-        offset,
-        limit,
+        offset: offset * limit,
+        limit: limit,
         include: [{
           model: Comments,
           limit: 1,
@@ -71,10 +63,10 @@ router.get('/comments/:id', (req, res) => {
           ],
         }]
       }).then(users => {
-        if(!user.length){
-          res.status(404).json({msg: '没有更多评论了!'})
+        if(users.length){          
+          res.status(200).json(users);
         }else{
-          res.status(200).json(users)
+          res.status(404).json({msg: '没有更多评论了!'});
         }    
       })
     }

@@ -87,7 +87,7 @@ export default {
         }
         comment(data).then(() => {
           Toast('发表成功~')
-          this.$router.push('/')
+          this.$router.go(-1)
         })
       }
     },

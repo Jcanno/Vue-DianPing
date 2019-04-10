@@ -9,7 +9,13 @@ export default {
   },
 
   getters: {
-
+    [types.GUserid](state){
+      if(state.user.userid){
+        return state.user.userid;
+      }else{
+        return 0;
+      }
+    }
   },
 
   mutations: {
@@ -28,9 +34,9 @@ export default {
   },
 
   actions: {
-    [types.AUserInfo]({commit}, id){
+    [types.AUserInfo]({ getters, commit }){
       return new Promise( (resolve, reject) => {
-        getUserInfo(id).then(res => {
+        getUserInfo(getters.guserid).then(res => {
           commit(types.MUserInfo, res.data);
           resolve(res.data)
         }).catch(err => {

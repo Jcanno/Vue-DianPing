@@ -17,10 +17,7 @@ db.authenticate().then(() => {
 
 
 function initModels(){
-  
-  
-  // db.drop()
-  
+
   Fan.sync({force:true}).then(() => {
     Fan.bulkCreate([
       { userid: '1', fanid: '2', id:1 },
@@ -28,23 +25,26 @@ function initModels(){
       { userid: '3', fanid: '3', id:3 },
     ]).then((arr) => {
       User.sync({force:true}).then(() => {
-        // User.bulkCreate([
-        //   { username: 'John', password:'222', fan_id:1 },
-        //   { username: 'John', password:'222', fan_id:1 },
-        //   { username: 'John', password:'222', fan_id:1 },
-        //   { username: 'Mike', password:'242', fan_id:2 },
-        //   { username: 'Luck', password:'322', fan_id:3 },
-        // ])
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash('123', salt, function(err, hash) {
               // Store hash in your password DB.
               if(err) throw err;
               User.bulkCreate([
                 { username: 'Mike', password:hash, nickname: 'Mike' },
-                { username: 'John', password:hash, nickname: 'Mike' },
-                { username: 'Jay', password:hash, nickname: 'Mike' },
-              ]).then(() => {
-                Comments.sync({force: true})
+                { username: 'John', password:hash, nickname: 'John' },
+                { username: 'Jay', password:hash, nickname: 'Jay' },
+                { username: 'Lucy', password:hash, nickname: 'Lucy' },
+              ]).then((users) => {
+                Comments.sync({force: true}).then(() => {
+                  Comments.bulkCreate([
+                    { title: 'abc', content: 'hahahsss', pics: 'http://127.0.0.1:3000/static/hashiqi1.jpg', userid:1 },
+                    { title: 'def', content: 'hahahdsada', pics: 'http://127.0.0.1:3000/static/hashiqi1.jpg', userid:2 },
+                    { title: 'ghi', content: 'hahahffadfad', pics: 'http://127.0.0.1:3000/static/hashiqi1.jpg', userid:3 },
+                    { title: 'jkl', content: 'hahahdfadf', pics: 'http://127.0.0.1:3000/static/hashiqi1.jpg', userid:4 },
+                  ]).then(comments => {
+                    
+                  })
+                })
               })
           });
         });
