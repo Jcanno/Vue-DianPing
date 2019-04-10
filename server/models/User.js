@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../db')
 const Fans = require('./Fans')
-
+const Comments = require('./Comments')
 const User = sequelize.define('user', {
   userid: {
     type: Sequelize.INTEGER,
@@ -32,5 +32,5 @@ const User = sequelize.define('user', {
 )
 
 User.hasMany(Fans)
-
+User.hasMany(Comments, {foreignKey: 'userid', targetKey: 'username'})
 module.exports = User;

@@ -5,7 +5,7 @@ import axios from '@/libs/request'
  */
 export const comment = (data) =>{
     return axios.request({
-      url: `comment`,
+      url: `comments/${data.userid}`,
       method: 'post',
       data,
     })

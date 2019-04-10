@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000
 const bodyParser = require("body-parser")
 const db = require('./db')
 const Fan = require('./models/Fans')
-const Comment = require('./models/Comment')
+const Comments = require('./models/Comments')
 const User = require('./models/User')
 const bcrypt = require("bcrypt")
 const path = require('path')
@@ -39,12 +39,12 @@ function initModels(){
           bcrypt.hash('123', salt, function(err, hash) {
               // Store hash in your password DB.
               if(err) throw err;
-              User.create({
-                username: 'Mike',
-                password: hash,
-                nickname: 'Mike'
-              }).then(() => {
-                Comment.sync({force: true})
+              User.bulkCreate([
+                { username: 'Mike', password:hash, nickname: 'Mike' },
+                { username: 'John', password:hash, nickname: 'Mike' },
+                { username: 'Jay', password:hash, nickname: 'Mike' },
+              ]).then(() => {
+                Comments.sync({force: true})
               })
           });
         });

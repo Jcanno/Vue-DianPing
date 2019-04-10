@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../db')
 
-const Comment = sequelize.define('comments', {
+const Comments = sequelize.define('comments', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  userid: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-  },
+  // userid: {
+  //   type: Sequelize.INTEGER,
+  //   allowNull: false,
+  // },
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -28,4 +28,4 @@ const Comment = sequelize.define('comments', {
 }
 )
 
-module.exports = Comment;
+module.exports = Comments;
