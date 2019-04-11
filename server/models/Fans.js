@@ -6,11 +6,6 @@ const Fans = sequelize.define('fans', {
     type: Sequelize.INTEGER,
     primaryKey: true
   },
-  userid: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    unique: true
-  },
   fanid: {
     type: Sequelize.STRING,
     allowNull: false,

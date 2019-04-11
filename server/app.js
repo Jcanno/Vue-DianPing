@@ -90,6 +90,8 @@ app.all("*", function(req, res, next){
 const user = require('./routes/user');
 const comment = require('./routes/comment');
 const upload = require('./routes/upload');
+const fan = require('./routes/fan');
+app.use('/', fan);
 app.use('/', upload);
 app.use('/user', user);
 app.use('/', comment);
