@@ -91,8 +91,8 @@ export default {
       this.page.offset += 1;
       this.load();
     },
-    onTurnToTab(){
-      this.$router.push('tabDetail')
+    onTurnToTab(commentId){
+      this.$router.push({ name: 'tabDetail', params: { commentId }})
     },
     load(){
       let query = `?limit=${this.page.limit}&offset=${this.page.offset}`;

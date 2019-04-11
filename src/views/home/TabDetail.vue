@@ -4,7 +4,8 @@
 
 <template>
   <div>
-    <van-swipe
+    <van-swipe 
+      v-if="images"
       @change="onChange"
       :height="height">
       <van-swipe-item 
@@ -25,16 +26,19 @@
       color="#fff" 
       size=20 
       @click="onClickBack"/>
-    <User class="user"></User>
+    <User 
+      class="user"
+      :avatar="comment.avatar"
+      :nickname="comment.nickname"
+      :content="comment.comments[0].content"
+      :createdAt="comment.comments[0].createdAt"
+    >
+    </User>
   </div>
 </template>
 
 <script>
-import hashiqi1 from '@/assets/test/hashiqi1.jpg'
-import hashiqi2 from '@/assets/test/hashiqi2.jpg'
-import hashiqi3 from '@/assets/test/hashiqi3.jpg'
-import hashiqi4 from '@/assets/test/hashiqi4.jpg'
-import hashiqi5 from '@/assets/test/hashiqi5.jpg'
+import * as types from '@/store/types'
 import User from './components/User'
 import { Swipe, SwipeItem, Icon, ImagePreview } from 'vant';
 import Vue from 'vue'
@@ -49,13 +53,8 @@ export default {
   data () {
     return {
       current: 0,
-      images:[
-        hashiqi1,
-        hashiqi2,
-        hashiqi3,
-        hashiqi4,
-        hashiqi5,
-      ],
+      images: [],
+      comment: {},
       height: 0 
     }
   },
@@ -78,9 +77,15 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+  },
 
   created(){
+    this.$store.dispatch(types.AComment, this.$route.params.commentId).then(res => {
+      console.log(res);
+      this.images = res.comments[0].pics.split(",");
+      this.comment = res;
+    });
     // 设置初始值
     let img = new Image();
     img.src = this.images[0]

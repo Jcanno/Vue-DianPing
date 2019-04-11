@@ -36,7 +36,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '@/views/my/My.vue')
   },
   {
-    path: '/tabDetail',
+    path: '/tabDetail/:commentId',
     name: 'tabDetail',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

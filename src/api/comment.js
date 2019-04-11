@@ -20,3 +20,13 @@ export const getComments = (userid, query = "") =>{
     method: 'get',
   })
 }
+
+/**
+ * 获取单个评论
+ */
+export const getComment = (commentid) =>{
+  return axios.request({
+    url: `comment/${commentid}`,
+    method: 'get',
+  })
+}

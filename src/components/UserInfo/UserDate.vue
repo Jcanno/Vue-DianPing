@@ -4,8 +4,8 @@
 
 <template>
   <div class="username-date">
-    <p>{{username}}</p>
-    <p class="date">{{date}}</p>
+    <p>{{nickname}}</p>
+    <p class="date">{{createdAt}}</p>
   </div>
 </template>
 
@@ -14,14 +14,12 @@ export default {
   name: 'userdate',
 
   props:{
-    username: {
+    nickname: {
       type: String,
-      default: "Kiko不能再胖了"
     },
-    date: {
-      type: String,
-      default: "3月29日  12:03"
-    }
+    createdAt: {
+      type: String
+    },
   },
 
   components:{},

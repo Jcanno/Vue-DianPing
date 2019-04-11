@@ -73,4 +73,31 @@ router.get('/comments/:id', (req, res) => {
   })
 })
 
+router.get('/comment/:id', (req, res) => {
+  const { id } = req.params;
+  Comments.findOne({
+    where: {
+      id
+    }
+  }).then(comment => {
+    User.findOne({
+      where: {
+        userid: comment.userid
+      },
+
+      include: [{
+        model: Comments,
+        where: {
+          id
+        }
+      }]
+    }).then(user => {
+      res.status(200).json(user);
+    }).catch(() => {
+      res.status(404)
+    })
+  })
+
+})
+
 module.exports = router

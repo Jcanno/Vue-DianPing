@@ -1,10 +1,15 @@
 import * as types from '../types'
-import { getComments } from '@/api/comment'
+import { getComments, getComment } from '@/api/comment'
 
 
 export default {
   state: {
-    comments: []
+    comments: [],
+    userComment: {
+      comments: [
+        { pics: ""}
+      ]
+    }
   },
 
   getters: {
@@ -18,6 +23,13 @@ export default {
     [types.MComments](state, access) {
       state.comments = access;
     },
+
+    /**
+     * 填充数据
+     */
+    [types.MComment](state, access) {
+      state.comment = access;
+    },
   },
 
   actions: {
@@ -28,6 +40,17 @@ export default {
           resolve(res.data)
         }).catch(err => {
           commit(types.MComments, []);
+          reject(err)
+        })
+      })
+    },
+    [types.AComment]({commit}, commentId){
+      return new Promise( (resolve, reject) => {
+        getComment(commentId).then(res => {
+          commit(types.MComment, res.data);
+          resolve(res.data)
+        }).catch(err => {
+          commit(types.MComment, {});
           reject(err)
         })
       })

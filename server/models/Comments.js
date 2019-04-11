@@ -1,5 +1,7 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../db')
+const moment = require('moment');
+
 
 const Comments = sequelize.define('comments', {
   id: {
@@ -22,6 +24,18 @@ const Comments = sequelize.define('comments', {
   pics: {
     type: Sequelize.TEXT,
     allowNull: false 
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    get() {
+        return moment(this.getDataValue('createdAt')).format('M月DD日 HH:mm');
+    }
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    get() {
+        return moment(this.getDataValue('updatedAt')).format('YYYY-MM-DD HH:mm:ss');
+    }
   }
 },{
   freezeTableName:true,
