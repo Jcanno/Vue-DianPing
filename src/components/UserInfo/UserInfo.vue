@@ -16,12 +16,13 @@
     <AddButton 
       class="add-button"
       @handleAddOrDeleteFollow="addOrDeleteFollow"
-      :btntext=btntext
+      :isFollowed=isFollowed
     />
   </div>
 </template>
 
 <script>
+import * as types from '@/store/types'
 import Avatar from './Avatar'
 import UserDate from './UserDate'
 import AddButton from './AddButton'
@@ -52,13 +53,14 @@ export default {
 
   data () {
     return {
-      btntext: "+ 关注"
     }
   },
 
   methods: {
+    reload(){
+      this.$store.dispatch(types.AComment, this.$route.params.commentId)
+    },
     addOrDeleteFollow(type){
-      console.log(this.$store.state.comment.comment.userid);
       if(this.$store.getters.guserid){
         let data = {
           fanid: this.$store.getters.guserid,
@@ -67,12 +69,12 @@ export default {
         if(type == "delete"){
           deleteFollow(data).then(() => {
             Toast('取消关注成功!');
-            this.btntext = "+ 关注";
+            this.reload();
           })
         }else{
           postFollow(data).then(() => {
             Toast('关注成功!');
-            this.btntext = "已关注";
+            this.reload();
           })
         }
         
@@ -83,7 +85,16 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    isFollowed(){
+      let comment = this.$store.state.comment.comment;
+      if(comment.fans.length){
+        return true;
+      }else{
+        return false;
+      }
+    }
+  },
 
   mounted(){
     

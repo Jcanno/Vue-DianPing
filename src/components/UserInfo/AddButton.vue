@@ -8,6 +8,7 @@
     round 
     class="add-button"
     @click="onAddOrDeleteFollow"
+    :style="btnstyle"
     >{{btntext}}
   </van-button>
 </template>
@@ -22,13 +23,14 @@ export default {
   components:{},
 
   props: {
-    btntext: {
-      type: String
+    isFollowed: {
+      type: Boolean
     }
   },
 
   data () {
     return {
+      
     }
   },
 
@@ -42,7 +44,28 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    btntext(){
+      if(this.isFollowed){
+        return "已关注";
+      }else{
+        return "+ 关注";
+      }
+    },
+    btnstyle(){
+      if(this.isFollowed){
+        return {
+          color: "#fff",
+          'background-color': "#8C8C8C"
+        }
+      }else{
+        return {
+          color: "#fff",
+          'background-color': "#FF6739"
+        }
+      }
+    }
+  },
 
   mounted(){
 

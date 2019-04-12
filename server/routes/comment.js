@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const Comments = require('../models/Comments')
 const User = require('../models/User')
+const Fans = require('../models/Fans')
 const Sequelize = require('Sequelize')
 const Op = Sequelize.Op
 
@@ -85,26 +86,23 @@ router.get('/comment/:id/:userid', (req, res) => {
         userid: comment.userid
       },
 
-      include: [{
-        model: Comments,
-        where: {
-          id
+      include: [
+        {
+          model: Comments,
+          where: {
+            id
+          }
+        },
+        {
+          model: Fans,
+          where: {
+            fanid: userid
+          },
+          required: false 
         }
-      }]
+      ]
     }).then(user => {
-      user.getFans({
-        where: {
-          fanid: userid
-        }
-      }).then(fan => {
-        if(fan){
-          user.fan = fan;
-          res.status(200).json(user);
-        }else{
-          res.status(200).json(user);
-        }
-      })
-      // res.status(200).json(user);
+        res.status(200).json(user);
     }).catch(() => {
       res.status(404)
     })

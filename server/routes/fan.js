@@ -39,12 +39,12 @@ router.delete('/fans/:fanid/:userid', (req, res) => {
     if(!user){
       res.status(404).json({msg: '找不到该用户'});
     }else{
-      Fans.findOne({
-        fanid
-      }).then(fan => {
-        user.removeFan([fan]).then(() => {
-          res.status(204).json(fan);
-        })
+      Fans.destroy({
+        where: {
+          fanid
+        }
+      }).then(() => {
+        res.status(204).json();
       })
     }
   })
