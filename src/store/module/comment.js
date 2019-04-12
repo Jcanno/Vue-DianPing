@@ -7,8 +7,10 @@ export default {
     comments: [],
     comment: {
       comments: [
-        { pics: ""}
-      ]
+        { pics: ""},
+        { discusses: []}
+      ],
+      fans: []
     }
   },
 

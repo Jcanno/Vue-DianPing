@@ -5,8 +5,7 @@ const User = require('../models/User')
 
 router.post('/fans/:fanid/:userid', (req, res) => {
   console.log(req.body);
-  const userid = req.params.userid;
-  const fanid = req.params.fanid;
+  const { userid, fanid } = req.params;
 
   User.findOne({
     where: {
@@ -28,8 +27,7 @@ router.post('/fans/:fanid/:userid', (req, res) => {
 })
 
 router.delete('/fans/:fanid/:userid', (req, res) => {
-  const userid = req.params.userid;
-  const fanid = req.params.fanid;
+  const { userid, fanid } = req.params;
 
   User.findOne({
     where: {

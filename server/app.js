@@ -6,6 +6,7 @@ const db = require('./db')
 const Fan = require('./models/Fans')
 const Comments = require('./models/Comments')
 const User = require('./models/User')
+const Discusses = require('./models/Discusses')
 const bcrypt = require("bcrypt")
 const path = require('path')
 db.authenticate().then(() => {
@@ -42,7 +43,9 @@ function initModels(){
                     { title: 'ghi', content: 'hahahffadfad', pics: 'http://127.0.0.1:3000/static/hashiqi1.jpg', userid:3 },
                     { title: 'jkl', content: 'hahahdfadf', pics: 'http://127.0.0.1:3000/static/hashiqi1.jpg', userid:4 },
                   ]).then(comments => {
-                    
+                    Discusses.sync({force: true}).then(() => {
+
+                    })
                   })
                 })
               })
@@ -91,6 +94,8 @@ const user = require('./routes/user');
 const comment = require('./routes/comment');
 const upload = require('./routes/upload');
 const fan = require('./routes/fan');
+const discuss = require('./routes/discuss');
+app.use('/', discuss);
 app.use('/', fan);
 app.use('/', upload);
 app.use('/user', user);

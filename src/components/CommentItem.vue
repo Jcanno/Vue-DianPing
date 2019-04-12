@@ -5,10 +5,17 @@
 <template>
   <div>
     <div class="item">
-      <Avatar :size=40 class="avatar"></Avatar>
-      <UserDate></UserDate>
+      <Avatar 
+        :size=40 
+        class="avatar"
+        :image=image
+      />
+      <UserDate
+        :nickname=nickname
+        :createdAt=createdAt
+      />
     </div>   
-    <p class="comment-text">{{comment}}</p>
+    <p class="comment-text">{{discuss}}</p>
   </div>
 </template>
 
@@ -24,11 +31,18 @@ export default {
   },
 
   props:{
-    comment: {
+    discuss: {
       type: String,
-      default: "感谢评论~感谢评论~感谢评论~感谢评论~感谢评论~"
     },
-
+    createdAt: {
+      type: String
+    },
+    image: {
+      type: String
+    },
+    nickname: {
+      type: String
+    },
   },
 
   data () {

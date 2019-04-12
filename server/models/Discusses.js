@@ -1,25 +1,29 @@
 const Sequelize = require('sequelize')
 const sequelize = require('../db')
 const moment = require('moment');
-const Discusses = require('./Discusses')
 
-const Comments = sequelize.define('comments', {
+
+const Discusses = sequelize.define('discusses', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  title: {
+  nickname: {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  content: {
-    type: Sequelize.TEXT,
+  avatar: {
+    type: Sequelize.STRING,
     allowNull: false,
   },
-  pics: {
-    type: Sequelize.TEXT,
-    allowNull: false 
+  userid: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
+  discuss: {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
   createdAt: {
     type: Sequelize.DATE,
@@ -38,6 +42,4 @@ const Comments = sequelize.define('comments', {
 }
 )
 
-Comments.hasMany(Discusses, {foreignKey: 'commentId'});
-
-module.exports = Comments;
+module.exports = Discusses;

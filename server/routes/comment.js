@@ -3,6 +3,7 @@ const router = express.Router()
 const Comments = require('../models/Comments')
 const User = require('../models/User')
 const Fans = require('../models/Fans')
+const Discusses = require('../models/Discusses')
 const Sequelize = require('Sequelize')
 const Op = Sequelize.Op
 
@@ -74,11 +75,13 @@ router.get('/comments/:id', (req, res) => {
   })
 })
 
-router.get('/comment/:id/:userid', (req, res) => {
-  const { id, userid } = req.params;
+
+// 获取单个评论
+router.get('/comment/:commentId/:userid', (req, res) => {
+  const { commentId, userid } = req.params;
   Comments.findOne({
     where: {
-      id
+      id: commentId
     }
   }).then(comment => {
     User.findOne({
@@ -90,8 +93,17 @@ router.get('/comment/:id/:userid', (req, res) => {
         {
           model: Comments,
           where: {
-            id
-          }
+            id: commentId
+          },
+          include: [
+            {
+              model: Discusses,
+              where: {
+                commentId 
+              },
+              required: false
+            }
+          ]
         },
         {
           model: Fans,
