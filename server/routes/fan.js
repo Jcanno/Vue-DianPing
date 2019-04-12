@@ -7,7 +7,7 @@ router.post('/fans/:fanid/:userid', (req, res) => {
   console.log(req.body);
   const userid = req.params.userid;
   const fanid = req.params.fanid;
-  Fans.create({
+  Fans.upsert({
     fanid,
     userid
   }).then(fan => {

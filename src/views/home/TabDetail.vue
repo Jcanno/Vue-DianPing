@@ -54,7 +54,6 @@ export default {
     return {
       current: 0,
       images: [],
-      comment: {},
       height: 0 
     }
   },
@@ -78,18 +77,21 @@ export default {
   },
 
   computed: {
+    comment(){
+      let comment = this.$store.state.comment.comment;
+      this.images = comment.comments[0].pics.split(",");
+      return comment
+    }
   },
 
   created(){
-    this.$store.dispatch(types.AComment, this.$route.params.commentId).then(res => {
-      console.log(res);
-      this.images = res.comments[0].pics.split(",");
-      this.comment = res;
+    this.$store.dispatch(types.AComment, this.$route.params.commentId).then(() => {
+      // 设置初始值
+      let img = new Image();
+      img.src = this.images[0];
+      this.height = document.body.clientWidth*img.height/img.width
     });
-    // 设置初始值
-    let img = new Image();
-    img.src = this.images[0]
-    this.height = document.body.clientWidth*img.height/img.width
+    
   },
 
   mounted(){

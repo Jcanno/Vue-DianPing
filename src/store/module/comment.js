@@ -5,7 +5,7 @@ import { getComments, getComment } from '@/api/comment'
 export default {
   state: {
     comments: [],
-    userComment: {
+    comment: {
       comments: [
         { pics: ""}
       ]

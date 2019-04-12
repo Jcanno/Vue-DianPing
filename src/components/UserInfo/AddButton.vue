@@ -7,6 +7,7 @@
     size="mini" 
     round 
     class="add-button"
+    @click="onAdd"
     >+ 关注
   </van-button>
 </template>
@@ -25,7 +26,11 @@ export default {
     }
   },
 
-  methods: {},
+  methods: {
+    onAdd(){
+      this.$emit('handleAdd')
+    }
+  },
 
   computed: {},
 

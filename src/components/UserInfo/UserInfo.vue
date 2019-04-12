@@ -14,7 +14,10 @@
       :nickname=nickname
       :createdAt=createdAt
     />
-    <AddButton class="add-button"></AddButton>
+    <AddButton 
+      class="add-button"
+      @handleAdd="addFollow"
+    />
   </div>
 </template>
 
@@ -22,6 +25,10 @@
 import Avatar from './Avatar'
 import UserDate from './UserDate'
 import AddButton from './AddButton'
+import { postFan } from '@/api/fan'
+import { Toast } from 'vant'
+import Vue from 'vue'
+Vue.use(Toast)
 export default {
   name: 'userinfo',
 
@@ -48,7 +55,23 @@ export default {
     }
   },
 
-  methods: {},
+  methods: {
+    addFollow(){
+      console.log(this.$store.state.comment.comment.userid);
+      if(this.$store.getters.guserid){
+        let data = {
+          fanid: this.$store.getters.guserid,
+          userid: this.$store.state.comment.comment.userid
+        }
+        postFan(data).then(() => {
+          Toast('关注成功!')
+        })
+      }else{
+        this.$router.push('/loginPage');
+      }
+      
+    }
+  },
 
   computed: {},
 
