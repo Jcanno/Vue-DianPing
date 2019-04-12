@@ -4,7 +4,8 @@ const sequelize = require('../db')
 const Fans = sequelize.define('fans', {
   id: {
     type: Sequelize.INTEGER,
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   },
   fanid: {
     type: Sequelize.STRING,

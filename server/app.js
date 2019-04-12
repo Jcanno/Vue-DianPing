@@ -19,11 +19,11 @@ db.authenticate().then(() => {
 function initModels(){
 
   Fan.sync({force:true}).then(() => {
-    Fan.bulkCreate([
-      { userid: '1', fanid: '2', id:1 },
-      { userid: '2', fanid: '1', id:2 },
-      { userid: '3', fanid: '3', id:3 },
-    ]).then((arr) => {
+    // Fan.bulkCreate([
+    //   { userid: '1', fanid: '2', id:1 },
+    //   { userid: '2', fanid: '1', id:2 },
+    //   { userid: '3', fanid: '3', id:3 },
+    // ]).then((arr) => {
       User.sync({force:true}).then(() => {
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash('123', salt, function(err, hash) {
@@ -48,7 +48,7 @@ function initModels(){
               })
           });
         });
-      })
+      // })
     })
   })
 

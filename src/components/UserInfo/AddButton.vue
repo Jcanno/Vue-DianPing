@@ -7,8 +7,8 @@
     size="mini" 
     round 
     class="add-button"
-    @click="onAdd"
-    >+ 关注
+    @click="onAddOrDeleteFollow"
+    >{{btntext}}
   </van-button>
 </template>
 
@@ -21,14 +21,24 @@ export default {
 
   components:{},
 
+  props: {
+    btntext: {
+      type: String
+    }
+  },
+
   data () {
     return {
     }
   },
 
   methods: {
-    onAdd(){
-      this.$emit('handleAdd')
+    onAddOrDeleteFollow(){
+      if(this.btntext == "已关注"){
+        this.$emit('handleAddOrDeleteFollow', 'delete');
+      }else{  
+        this.$emit('handleAddOrDeleteFollow', 'add');
+      }
     }
   },
 

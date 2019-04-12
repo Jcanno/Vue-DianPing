@@ -1,41 +1,53 @@
 const express = require("express")
 const router = express.Router()
 const Fans = require('../models/Fans')
-
+const User = require('../models/User')
 
 router.post('/fans/:fanid/:userid', (req, res) => {
   console.log(req.body);
   const userid = req.params.userid;
   const fanid = req.params.fanid;
-  Fans.upsert({
-    fanid,
-    userid
-  }).then(fan => {
-    res.status(201).json(fan);
-  }).catch(() => {
-    res.status(404);
+
+  User.findOne({
+    where: {
+      userid
+    }
+  }).then(user => {
+    if(!user){
+      res.status(404).json({msg: '找不到该用户'});
+    }else{
+      Fans.create({
+        fanid
+      }).then(fan => {
+        user.addFan([fan]).then(() => {
+          res.status(201).json(fan);
+        })
+      })
+    }
   })
-  // User.findOne({
-  //   where: {
-  //     userid: userid
-  //   }
-  // }).then(user => {
-  //   if(!user){
-  //     res.status(400).json({msg: '找不到该用户!'})
-  //   }else{
-  //     Comments.create({
-  //       title: req.body.title,
-  //       content: req.body.content,
-  //       pics: req.body.pics,
-  //     }).then(comment => {
-  //       user.addComment([comment]).then(() => {
-  //         res.status(201).json(comment);
-  //       })
-  //     })
-  //   }
-  // })
 })
 
+router.delete('/fans/:fanid/:userid', (req, res) => {
+  const userid = req.params.userid;
+  const fanid = req.params.fanid;
 
+  User.findOne({
+    where: {
+      userid
+    }
+  }).then(user => {
+    if(!user){
+      res.status(404).json({msg: '找不到该用户'});
+    }else{
+      Fans.findOne({
+        fanid
+      }).then(fan => {
+        user.removeFan([fan]).then(() => {
+          res.status(204).json(fan);
+        })
+      })
+    }
+  })
+})
 
 module.exports = router

@@ -78,14 +78,13 @@ export default {
 
   computed: {
     comment(){
-      let comment = this.$store.state.comment.comment;
-      this.images = comment.comments[0].pics.split(",");
-      return comment
+      return this.$store.state.comment.comment;
     }
   },
 
   created(){
-    this.$store.dispatch(types.AComment, this.$route.params.commentId).then(() => {
+    this.$store.dispatch(types.AComment, this.$route.params.commentId).then((res) => {
+      this.images = res.comments[0].pics.split(",");
       // 设置初始值
       let img = new Image();
       img.src = this.images[0];

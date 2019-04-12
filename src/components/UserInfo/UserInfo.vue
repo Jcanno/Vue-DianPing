@@ -8,15 +8,15 @@
       :size=40 
       class="avatar"
       :image=avatar
-    >
-    </Avatar>
+    />
     <UserDate
       :nickname=nickname
       :createdAt=createdAt
     />
     <AddButton 
       class="add-button"
-      @handleAdd="addFollow"
+      @handleAddOrDeleteFollow="addOrDeleteFollow"
+      :btntext=btntext
     />
   </div>
 </template>
@@ -25,7 +25,7 @@
 import Avatar from './Avatar'
 import UserDate from './UserDate'
 import AddButton from './AddButton'
-import { postFan } from '@/api/fan'
+import { postFollow, deleteFollow } from '@/api/fan'
 import { Toast } from 'vant'
 import Vue from 'vue'
 Vue.use(Toast)
@@ -52,20 +52,30 @@ export default {
 
   data () {
     return {
+      btntext: "+ 关注"
     }
   },
 
   methods: {
-    addFollow(){
+    addOrDeleteFollow(type){
       console.log(this.$store.state.comment.comment.userid);
       if(this.$store.getters.guserid){
         let data = {
           fanid: this.$store.getters.guserid,
           userid: this.$store.state.comment.comment.userid
         }
-        postFan(data).then(() => {
-          Toast('关注成功!')
-        })
+        if(type == "delete"){
+          deleteFollow(data).then(() => {
+            Toast('取消关注成功!');
+            this.btntext = "+ 关注";
+          })
+        }else{
+          postFollow(data).then(() => {
+            Toast('关注成功!');
+            this.btntext = "已关注";
+          })
+        }
+        
       }else{
         this.$router.push('/loginPage');
       }

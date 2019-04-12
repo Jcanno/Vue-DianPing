@@ -24,9 +24,9 @@ export const getComments = (userid, query = "") =>{
 /**
  * 获取单个评论
  */
-export const getComment = (commentid) =>{
+export const getComment = (commentid, userid) =>{
   return axios.request({
-    url: `comment/${commentid}`,
+    url: `comment/${commentid}/${userid}`,
     method: 'get',
   })
 }

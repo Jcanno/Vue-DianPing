@@ -73,8 +73,8 @@ router.get('/comments/:id', (req, res) => {
   })
 })
 
-router.get('/comment/:id', (req, res) => {
-  const { id } = req.params;
+router.get('/comment/:id/:userid', (req, res) => {
+  const { id, userid } = req.params;
   Comments.findOne({
     where: {
       id
@@ -92,7 +92,19 @@ router.get('/comment/:id', (req, res) => {
         }
       }]
     }).then(user => {
-      res.status(200).json(user);
+      user.getFans({
+        where: {
+          fanid: userid
+        }
+      }).then(fan => {
+        if(fan){
+          user.fan = fan;
+          res.status(200).json(user);
+        }else{
+          res.status(200).json(user);
+        }
+      })
+      // res.status(200).json(user);
     }).catch(() => {
       res.status(404)
     })

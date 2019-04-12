@@ -44,9 +44,9 @@ export default {
         })
       })
     },
-    [types.AComment]({commit}, commentId){
+    [types.AComment]({getters, commit}, commentId){
       return new Promise( (resolve, reject) => {
-        getComment(commentId).then(res => {
+        getComment(commentId, getters.guserid).then(res => {
           commit(types.MComment, res.data);
           resolve(res.data)
         }).catch(err => {
