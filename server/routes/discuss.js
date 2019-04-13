@@ -1,10 +1,6 @@
 const express = require("express")
 const router = express.Router()
-const Comments = require('../models/Comments')
-const User = require('../models/User')
 const Discusses = require('../models/Discusses')
-const Sequelize = require('Sequelize')
-const Op = Sequelize.Op
 
 router.post('/discusses/:commentId', (req, res) => {
   console.log(req.body);

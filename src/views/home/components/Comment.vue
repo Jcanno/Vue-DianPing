@@ -85,8 +85,8 @@ export default {
             discuss: this.discuss
           }
           postDiscuss(data).then(() => {
-            console.log('成功了！');
             this.discuss = "";
+            Toast('发布成功~');
             this.reload();
           })
         }

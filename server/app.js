@@ -7,6 +7,7 @@ const Fan = require('./models/Fans')
 const Comments = require('./models/Comments')
 const User = require('./models/User')
 const Discusses = require('./models/Discusses')
+const Thumbs = require('./models/Thumbs')
 const bcrypt = require("bcrypt")
 const path = require('path')
 db.authenticate().then(() => {
@@ -44,7 +45,9 @@ function initModels(){
                     { title: 'jkl', content: 'hahahdfadf', pics: 'http://127.0.0.1:3000/static/hashiqi1.jpg', userid:4 },
                   ]).then(comments => {
                     Discusses.sync({force: true}).then(() => {
+                      Thumbs.sync({force: true}).then(() => {
 
+                      })
                     })
                   })
                 })
