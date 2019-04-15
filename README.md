@@ -24,7 +24,7 @@ cd Vue-DianPing
 npm install
 ```
 
-## 运行编译程序
+## 运行编译程序（同时运行前端和服务端）
 ```
 npm run serve
 ```
@@ -35,3 +35,7 @@ npm run build
 ```
 
 ### 示例所用node.js的orm框架sequelize,数据库postgreSql,数据库配置在'/server/config/dbConfig'中
+### 参考文档  
+* [sequelize](https://github.com/demopark/sequelize-docs-Zh-CN)
+* [vue-cli](https://cli.vuejs.org/zh/)
+
