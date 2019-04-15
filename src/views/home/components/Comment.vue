@@ -59,14 +59,16 @@ export default {
   data () {
     return {
       discuss: '',
-      image: this.$store.state.user.user.avatar ? this.$store.state.user.user.avatar : LoginImage
+      image: this.$store.state.user.isLogin ? this.$store.state.user.user.avatar : LoginImage
     }
   },
 
   methods: {
+    // 重载
     reload(){
       this.$store.dispatch(types.AComment, this.$route.params.commentId)
     },
+    // 发布讨论
     onDiscuss(){
       if(this.$store.getters.guserid){
         if(this.comment == ""){

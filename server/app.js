@@ -21,11 +21,6 @@ db.authenticate().then(() => {
 function initModels(){
 
   Fan.sync({force:true}).then(() => {
-    // Fan.bulkCreate([
-    //   { userid: '1', fanid: '2', id:1 },
-    //   { userid: '2', fanid: '1', id:2 },
-    //   { userid: '3', fanid: '3', id:3 },
-    // ]).then((arr) => {
       User.sync({force:true}).then(() => {
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash('123', salt, function(err, hash) {
@@ -64,54 +59,34 @@ function initModels(){
   })
 
 }
-// db.sync()
+
 initModels()
-
-
-app.get('/getSome', (req, res) => {
-  // User.findOne({where: {username: 'Mike'}}).then(data => {
-  //   res.json(data)
-    
-  // })
-
-  User.findAll({
-    where: {username: 'John'},
-    // include: [{
-    //   model: Fan
-    // }]
-  }).then(data => {
-    res.json(data)
-  })
-})
 
 // 使用body-parser
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
-
-
 app.all("*", function(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Content-Type");
   res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS,PATCH");
-  // res.header("Content-Type", "application/json;charset=utf-8");
   next()
 })
 
 const user = require('./routes/user');
+app.use('/', user);
 const comment = require('./routes/comment');
+app.use('/', comment);
 const upload = require('./routes/upload');
+app.use('/', upload);
 const fan = require('./routes/fan');
+app.use('/', fan);
 const discuss = require('./routes/discuss');
+app.use('/', discuss);
 const thumbUp = require('./routes/thumbUp');
 app.use('/', thumbUp);
-app.use('/', discuss);
-app.use('/', fan);
-app.use('/', upload);
-app.use('/', user);
-app.use('/', comment);
 
-
+// 访问静态文件
 app.use('/static', express.static(path.join(__dirname, 'files')))
 app.use('/upload', express.static(path.join(__dirname, 'uploads')))
 

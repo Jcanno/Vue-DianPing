@@ -25,13 +25,10 @@
       class="back-button" 
       color="#fff" 
       size=20 
-      @click="onClickBack"/>
+      @click="onGoBack"/>
     <User 
       class="user"
-      :avatar="comment.user.avatar"
-      :nickname="comment.user.nickname"
       :content="comment.content"
-      :createdAt="comment.createdAt"
     >
     </User>
   </div>
@@ -59,9 +56,11 @@ export default {
   },
 
   methods: {
-    onClickBack(){
+    // 回退页面
+    onGoBack(){
       this.$router.go(-1)
     },
+    // 查看大图
     onCheakPhoto(){
       ImagePreview({
         images: this.images,

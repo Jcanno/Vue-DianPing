@@ -7,16 +7,16 @@
     <Avatar 
       :size=40 
       class="avatar"
-      :image="avatar"
+      :image="comment.avatar"
     />
     <UserDate
-      :nickname=nickname
-      :createdAt="createdAt"
+      :nickname="comment.user.nickname"
+      :createdAt="comment.createdAt"
     />
     <AddButton 
       class="add-button"
       @handleAddOrDeleteFollow="addOrDeleteFollow"
-      :isFollowed="isFollowed"
+      :isFollowed="comment.isFollowed"
     />
   </div>
 </template>
@@ -40,15 +40,6 @@ export default {
   },
 
   props: {
-    createdAt: {
-      type: String
-    },
-    avatar: {
-      type: String
-    },
-    nickname: {
-      type: String
-    }
   },
 
   data () {
@@ -86,9 +77,9 @@ export default {
   },
 
   computed: {
-    isFollowed(){
-      return this.$store.state.comment.comment.isFollowed;
-    }
+    comment(){
+      return this.$store.state.comment.comment;
+    },
   },
 
   mounted(){

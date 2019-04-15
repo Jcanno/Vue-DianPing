@@ -6,7 +6,6 @@ const Fans = require('../models/Fans')
 const Discusses = require('../models/Discusses')
 const Sequelize = require('Sequelize')
 const Thumbs = require('../models/Thumbs')
-const sequelize = require('../db')
 const Op = Sequelize.Op
 
 

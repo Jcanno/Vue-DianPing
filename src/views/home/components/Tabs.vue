@@ -11,15 +11,20 @@
       animated
       color="#FF6739"
       >
-      <van-tab v-for="item in tabs" :key="item.name" :title="item.name" class="masonry" >
+      <van-tab 
+        v-for="item in tabs" 
+        :key="item.name" 
+        :title="item.name" 
+        class="masonry" 
+      >
         <van-list          
           v-model="loading"
           :finished="finished"
           finished-text="没有更多了"
-          @load="onLoad"
+          @load="reload"
           :offset=10
         >
-          <div class="item" v-for="i in comments" :key="i.id" @click="onTurnToTab(i.id)"> 
+          <div class="item" v-for="i in comments" :key="i.id" @click="onGoToTab(i.id)"> 
             <div class="item_content content-lar"> 
               <img :src="i.firstPic" alt="">
               <div class="desc">
@@ -122,12 +127,12 @@ export default {
       }
     },
     // 重载
-    onLoad(){
+    reload(){
       this.page.offset += 1;
       this.load();
     },
     // 跳转到详情页
-    onTurnToTab(commentId){
+    onGoToTab(commentId){
       this.$router.push({ name: 'tabDetail', params: { commentId }})
     },
     // 加载

@@ -8,11 +8,11 @@
       <Avatar 
         :size=40 
         class="avatar"
-        :image=image
+        :image="image"
       />
       <UserDate
-        :nickname=nickname
-        :createdAt=createdAt
+        :nickname="nickname"
+        :createdAt="createdAt"
       />
     </div>   
     <p class="comment-text">{{discuss}}</p>

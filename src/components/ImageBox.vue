@@ -12,7 +12,8 @@
       <img 
         :src="item" 
         alt=""
-        @click="onCheakPhoto(item)">
+        @click="onCheakPhoto(item)"
+      />
       </van-col>
   </van-row>
 </template>

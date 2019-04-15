@@ -4,11 +4,7 @@
 
 <template>
   <div>
-    <UserInfo
-      :avatar="avatar"
-      :nickname="nickname"
-      :createdAt="createdAt"
-    />
+    <UserInfo />
     <div class="comment">
       <p>
         {{content}}
@@ -31,15 +27,6 @@ export default {
   name: 'user',
 
   props:{
-    avatar: {
-      type: String,
-    },
-    createdAt: {
-      type: String
-    },
-    nickname: {
-      type: String,
-    },
     content: {
       type: String
     },
