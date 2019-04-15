@@ -5,9 +5,9 @@
 * Vuex
 * Vue-Router
 * Vue-Cli
-* express
-* sequelize
-* postgreSql
+* Express
+* Sequelize
+* PostgreSql
 
 
 ## 实现功能:
@@ -36,6 +36,8 @@ npm run build
 
 ### 示例所用node.js的orm框架sequelize,数据库postgreSql,数据库配置在'/server/config/dbConfig'中
 ### 参考文档  
-* [sequelize](https://github.com/demopark/sequelize-docs-Zh-CN)
-* [vue-cli](https://cli.vuejs.org/zh/)
-
+* [Sequelize](https://github.com/demopark/sequelize-docs-Zh-CN)
+* [Vue-Cli](https://cli.vuejs.org/zh/)
+* [Express](https://cli.vuejs.org/zh/)
+* [Vue-Router](https://router.vuejs.org/zh/guide/)
+* [Vuex](https://vuex.vuejs.org/zh/)
