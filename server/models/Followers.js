@@ -21,9 +21,5 @@ const Followers = sequelize.define('followers', {
 }
 )
 
-// const fans = Fans.sync({force: true}).then(() => {
-//   console.log('创建了表');
-  
-// })
 
 module.exports = Followers;

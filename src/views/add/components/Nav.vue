@@ -5,8 +5,8 @@
 <template>
   <van-nav-bar
     left-arrow
-    @click-left="onClickBack"
-    @click-right="onClickSend"
+    @click-left="onGoBack"
+    @click-right="onPublish"
   > 
     <van-icon 
       name="arrow-left"
@@ -14,7 +14,14 @@
       color="#000000"
       slot="left"
     />
-    <van-button class="publish-button" size="small" round  slot="right">发表</van-button>
+    <van-button 
+      class="publish-button" 
+      size="small" 
+      round  
+      slot="right"
+    >
+    发表
+    </van-button>
   </van-nav-bar>
 </template>
 
@@ -33,10 +40,12 @@ export default {
   },
 
   methods: {
-    onClickBack(){
+    // 回退页面
+    onGoBack(){
       this.$router.go(-1);
     },
-    onClickSend(){
+    // 发表
+    onPublish(){
       this.$emit('onPublish');
     }
   },

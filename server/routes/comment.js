@@ -9,21 +9,26 @@ const Thumbs = require('../models/Thumbs')
 const sequelize = require('../db')
 const Op = Sequelize.Op
 
-router.post('/comments/:id', (req, res) => {
-  console.log(req.body);
-  const userid = req.params.id;
+
+/**
+ * 发布评论接口
+ * @param userid  用户id
+ */
+router.post('/comments/:userid', (req, res) => {
+  const { userid } = req.params;
+  const { title, content, pics } = req.body;
   User.findOne({
     where: {
-      userid: userid
+      userid
     }
   }).then(user => {
     if(!user){
       res.status(400).json({msg: '找不到该用户!'})
     }else{
       Comments.create({
-        title: req.body.title,
-        content: req.body.content,
-        pics: req.body.pics,
+        title,
+        content,
+        pics,
       }).then(comment => {
         user.addComment([comment]).then(() => {
           res.status(201).json(comment);
@@ -33,10 +38,11 @@ router.post('/comments/:id', (req, res) => {
   })
 })
 
-
-// 根据评论表筛选用户，去重后关联查询用户评论数据
+/**
+ * 获取全部评论接口
+ * @param userid  用户id
+ */
 router.get('/comments/:userid', (req, res) => {
-  // console.log(req.body);
   const { userid, } = req.params;
   const { offset, limit } = req.query;
 
@@ -101,7 +107,11 @@ function thumbCount(comment, userid){
 }
 
 
-// 获取单个评论
+/**
+ * 获取单个评论接口
+ * @param userid     用户id
+ * @param commentId  评论id
+ */
 router.get('/comment/:commentId/:userid', (req, res) => {
   const { commentId, userid } = req.params;
 
@@ -136,50 +146,7 @@ router.get('/comment/:commentId/:userid', (req, res) => {
     }else{
       res.status(404).json();
     }
-    
   })
-
-  // Comments.findOne({
-  //   where: {
-  //     id: commentId
-  //   }
-  // }).then(comment => {
-  //   User.findOne({
-  //     where: {
-  //       userid: comment.userid
-  //     },
-
-  //     include: [
-  //       {
-  //         model: Comments,
-  //         where: {
-  //           id: commentId
-  //         },
-  //         include: [
-  //           {
-  //             model: Discusses,
-  //             where: {
-  //               commentId 
-  //             },
-  //             required: false
-  //           }
-  //         ]
-  //       },
-  //       {
-  //         model: Fans,
-  //         where: {
-  //           fanid: userid
-  //         },
-  //         required: false 
-  //       }
-  //     ]
-  //   }).then(user => {
-  //       res.status(200).json(user);
-  //   }).catch(() => {
-  //     res.status(404)
-  //   })
-  // })
-
 })
 
 module.exports = router

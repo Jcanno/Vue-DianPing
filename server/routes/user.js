@@ -93,7 +93,6 @@ router.patch('/userinfo/:userid', (req, res) => {
  * 获取用户信息接口
  * @param userid  用户id
  */
-
 router.get('/userinfo/:userid', (req, res) => {
   const { userid } = req.params;
   User.findOne({

@@ -5,13 +5,7 @@ import { getComments, getComment } from '@/api/comment'
 export default {
   state: {
     comments: [],
-    comment: {
-      comments: [
-        { pics: ""},
-        { discusses: []}
-      ],
-      fans: []
-    }
+    comment: {}
   },
 
   getters: {
@@ -35,6 +29,10 @@ export default {
   },
 
   actions: {
+    /**
+     * 获取多个评论
+     * @param query 查询参数
+     */
     [types.AComments]({getters, commit}, query){
       return new Promise( (resolve, reject) => {
         getComments(getters.guserid, query).then(res => {
@@ -46,6 +44,10 @@ export default {
         })
       })
     },
+    /**
+     * 获取单个评论
+     * @param commentId 评论id
+     */
     [types.AComment]({getters, commit}, commentId){
       return new Promise( (resolve, reject) => {
         getComment(commentId, getters.guserid).then(res => {

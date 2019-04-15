@@ -98,7 +98,7 @@ export default {
       }else{
         patchUserInfo({
           nickname: this.nickname,
-          id: this.$store.getters.guserid
+          userid: this.$store.getters.guserid
         }).then(() => {
           Toast('更新成功!');
           this.reload();  
@@ -111,7 +111,7 @@ export default {
       data.append('file', file.file);
       uploadSingle(data).then(res => {        
         let data = {
-          id: this.$store.getters.guserid,
+          userid: this.$store.getters.guserid,
           avatar: res.data.url
         }
         patchUserInfo(data).then(() => {

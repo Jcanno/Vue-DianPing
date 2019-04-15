@@ -51,9 +51,22 @@
 import { upload, uploadSingle } from '@/api/upload'
 import { comment } from '@/api/comment'
 import Nav from './components/Nav'
-import { Popup, Field, Uploader, Row, Col, ImagePreview, Toast } from 'vant';
+import { 
+  Popup, 
+  Field, 
+  Uploader, 
+  Row, 
+  Col, 
+  ImagePreview, 
+  Toast 
+} from 'vant';
 import Vue from 'vue';
-Vue.use(Popup).use(Field).use(Uploader).use(Row).use(Col).use(Toast);
+Vue.use(Popup)
+   .use(Field)
+   .use(Uploader)
+   .use(Row)
+   .use(Col)
+   .use(Toast);
 export default {
   name: 'add',
 
@@ -78,12 +91,11 @@ export default {
       if(this.comment == "" || this.title == "" || this.images.length == 0){
         Toast('请填写完整评论信息!')
       }else{
-        let userid = this.$store.state.user.user.userid;
         let data = {
           title: this.title,
           content: this.comment,
           pics: this.images.join(","),
-          userid
+          userid: this.$store.getters.guserid
         }
         comment(data).then(() => {
           Toast('发表成功~')
@@ -91,6 +103,10 @@ export default {
         })
       }
     },
+    /*
+     * 上传图片  分为两种：一种单选，另一种多选
+     * 通过文件数量判断单选还是多选
+     */
     onRead(file){
       let data = new FormData();
       if(Array.isArray(file)){
@@ -107,8 +123,9 @@ export default {
         })
       }
     },
+    // 查看大图
     onCheakPhoto(item){
-      let current = this.images.indexOf(item)
+      let current = this.images.indexOf(item);
       ImagePreview({
         images: this.images,
         startPosition: current,

@@ -3,6 +3,12 @@ const router = express.Router()
 const Fans = require('../models/Fans')
 const User = require('../models/User')
 
+
+/**
+ * 关注接口
+ * @param fanid  粉丝id
+ * @param userid 用户id
+ */
 router.post('/fans/:fanid/:userid', (req, res) => {
   console.log(req.body);
   const { userid, fanid } = req.params;
@@ -26,6 +32,12 @@ router.post('/fans/:fanid/:userid', (req, res) => {
   })
 })
 
+
+/**
+ * 取消关注接口
+ * @param fanid  粉丝id
+ * @param userid 用户id
+ */
 router.delete('/fans/:fanid/:userid', (req, res) => {
   const { userid, fanid } = req.params;
 

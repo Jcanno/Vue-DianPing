@@ -2,10 +2,13 @@ const express = require("express")
 const router = express.Router()
 const Thumbs = require('../models/Thumbs')
 
+/**
+ * 点赞接口
+ * @param commentId  评论id
+ * @param userid     用户id
+ */
 router.post('/thumbsUp/:commentId/:userid', (req, res) => {
-  console.log(req.body);
   const { userid, commentId } = req.params;
-  // const { userid, avatar, nickname, discuss } = req.body;
   Thumbs.create({
     userid,
     commentId
@@ -16,10 +19,14 @@ router.post('/thumbsUp/:commentId/:userid', (req, res) => {
   })
 })
 
+
+/**
+ * 取消点赞接口
+ * @param commentId  评论id
+ * @param userid     用户id
+ */
 router.delete('/thumbsUp/:commentId/:userid', (req, res) => {
-  console.log(req.body);
   const { userid, commentId } = req.params;
-  // const { userid, avatar, nickname, discuss } = req.body;
   Thumbs.findOne({
     where: {
       userid,

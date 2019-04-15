@@ -17,12 +17,6 @@ class HttpRequest {
     };
     return config;
   }
-  distroy (url) {
-    delete this.queue[url];
-    if (!Object.keys(this.queue).length) {
-      // Spin.hide()
-    }
-  }
   interceptors (instance, ) {
     // 请求拦截
     instance.interceptors.request.use(config => {
@@ -32,9 +26,6 @@ class HttpRequest {
     });
     // 响应拦截
     instance.interceptors.response.use(res => {  
-    //   if (res.status !== 200 && res.status !== 201 && res.status !== 202 && res.status !== 204) {
-
-    // }
       return Promise.resolve(res)
     },error => {
       if(error.response.data.msg){
