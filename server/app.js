@@ -46,7 +46,12 @@ function initModels(){
                   ]).then(comments => {
                     Discusses.sync({force: true}).then(() => {
                       Thumbs.sync({force: true}).then(() => {
-
+                        Thumbs.bulkCreate([
+                          { userid:1, commentId:2 },
+                          { userid:3, commentId:2 }
+                        ]).then((thumbs) => {
+                          // comments[1].addThumb([thumb])
+                        })
                       })
                     })
                   })
@@ -98,6 +103,8 @@ const comment = require('./routes/comment');
 const upload = require('./routes/upload');
 const fan = require('./routes/fan');
 const discuss = require('./routes/discuss');
+const thumbUp = require('./routes/thumbUp');
+app.use('/', thumbUp);
 app.use('/', discuss);
 app.use('/', fan);
 app.use('/', upload);

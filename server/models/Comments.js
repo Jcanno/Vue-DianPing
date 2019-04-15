@@ -41,5 +41,4 @@ const Comments = sequelize.define('comments', {
 
 Comments.hasMany(Discusses, {foreignKey: 'commentId'});
 Comments.hasMany(Thumbs, {foreignKey: 'commentId'});
-
 module.exports = Comments;

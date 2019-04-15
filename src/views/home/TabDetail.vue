@@ -28,10 +28,10 @@
       @click="onClickBack"/>
     <User 
       class="user"
-      :avatar="comment.avatar"
-      :nickname="comment.nickname"
-      :content="comment.comments[0].content"
-      :createdAt="comment.comments[0].createdAt"
+      :avatar="comment.user.avatar"
+      :nickname="comment.user.nickname"
+      :content="comment.content"
+      :createdAt="comment.createdAt"
     >
     </User>
   </div>
@@ -84,11 +84,11 @@ export default {
 
   created(){
     this.$store.dispatch(types.AComment, this.$route.params.commentId).then((res) => {
-      this.images = res.comments[0].pics.split(",");
+      this.images = res.pics.split(",");
       // 设置初始值
       let img = new Image();
       img.src = this.images[0];
-      this.height = document.body.clientWidth*img.height/img.width
+      this.height = document.body.clientWidth*img.height/img.width;
     });
     
   },

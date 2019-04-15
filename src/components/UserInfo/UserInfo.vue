@@ -7,16 +7,16 @@
     <Avatar 
       :size=40 
       class="avatar"
-      :image=avatar
+      :image="avatar"
     />
     <UserDate
       :nickname=nickname
-      :createdAt=createdAt
+      :createdAt="createdAt"
     />
     <AddButton 
       class="add-button"
       @handleAddOrDeleteFollow="addOrDeleteFollow"
-      :isFollowed=isFollowed
+      :isFollowed="isFollowed"
     />
   </div>
 </template>
@@ -87,12 +87,7 @@ export default {
 
   computed: {
     isFollowed(){
-      let comment = this.$store.state.comment.comment;
-      if(comment.fans.length){
-        return true;
-      }else{
-        return false;
-      }
+      return this.$store.state.comment.comment.isFollowed;
     }
   },
 

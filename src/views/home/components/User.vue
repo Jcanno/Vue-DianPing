@@ -5,9 +5,9 @@
 <template>
   <div>
     <UserInfo
-      :avatar=avatar
-      :nickname=nickname
-      :createdAt=createdAt
+      :avatar="avatar"
+      :nickname="nickname"
+      :createdAt="createdAt"
     />
     <div class="comment">
       <p>

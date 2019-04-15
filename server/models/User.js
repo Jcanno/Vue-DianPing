@@ -31,6 +31,7 @@ const User = sequelize.define('user', {
 }
 )
 
-User.hasMany(Fans, {foreignKey: 'userid'})
-User.hasMany(Comments, {foreignKey: 'userid', targetKey: 'username'})
+User.hasMany(Fans, {foreignKey: 'userid'});
+User.hasMany(Comments, {foreignKey: 'userid', targetKey: 'username'});
+Comments.belongsTo(User, {foreignKey: 'userid'})
 module.exports = User;

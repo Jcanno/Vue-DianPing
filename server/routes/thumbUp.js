@@ -2,12 +2,12 @@ const express = require("express")
 const router = express.Router()
 const Thumbs = require('../models/Thumbs')
 
-router.post('/thumbsUp/:commentId/:userId', (req, res) => {
+router.post('/thumbsUp/:commentId/:userid', (req, res) => {
   console.log(req.body);
-  const { userId, commentId } = req.params;
+  const { userid, commentId } = req.params;
   // const { userid, avatar, nickname, discuss } = req.body;
   Thumbs.create({
-    userId,
+    userid,
     commentId
   }).then(thumb => {
     res.status(201).json(thumb);
@@ -16,13 +16,13 @@ router.post('/thumbsUp/:commentId/:userId', (req, res) => {
   })
 })
 
-router.delete('/thumbsUp/:commentId/:userId', (req, res) => {
+router.delete('/thumbsUp/:commentId/:userid', (req, res) => {
   console.log(req.body);
-  const { userId, commentId } = req.params;
+  const { userid, commentId } = req.params;
   // const { userid, avatar, nickname, discuss } = req.body;
   Thumbs.findOne({
     where: {
-      userId,
+      userid,
       commentId
     }
   }).then(thumb => {
@@ -31,7 +31,7 @@ router.delete('/thumbsUp/:commentId/:userId', (req, res) => {
     }else{
       Thumbs.destroy({
         where: {
-          userId,
+          userid,
           commentId
         }
       }).then(() => {

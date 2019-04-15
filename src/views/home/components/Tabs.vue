@@ -19,17 +19,30 @@
           @load="onLoad"
           :offset=10
         >
-          <div class="item" v-for="i in comments" :key="i.userid" @click="onTurnToTab(i.comments[0].id)"> 
+          <div class="item" v-for="i in comments" :key="i.id" @click="onTurnToTab(i.id)"> 
             <div class="item_content content-lar"> 
-              <img :src="i.comments[0].firstPic" alt="">
+              <img :src="i.firstPic" alt="">
               <div class="desc">
-                <p class="title">{{i.comments[0].title}}</p>
+                <p class="title">{{i.title}}</p>
                 <div class="info">
-                  <img class="avatar" :src="i.avatar" alt="">
-                  <span class="username">{{i.nickname}}</span>
-                  <div class="good">
-                    <van-icon name="like-o" size="10px" style="display:inline-block"/>
-                    <span class="count">5</span> 
+                  <img class="avatar" :src="i.user.avatar" alt="">
+                  <span class="username">{{i.user.nickname}}</span>
+                  <div class="good" @click.stop="onThumbUp(i.id)">
+                    <van-icon 
+                      v-if="i.isThumbUp" 
+                      name="like" 
+                      size="10px"
+                      color="#FF6739" 
+                      style="display:inline-block"
+                    />
+                    <van-icon
+                      v-if="!i.isThumbUp"
+                      name="like-o" 
+                      size="10px"
+                      color="#000000" 
+                      style="display:inline-block"                      
+                    />
+                    <span class="count">{{i.thumbsCount}}</span> 
                   </div>
                 </div>
               </div>
@@ -42,6 +55,7 @@
 </template>
 
 <script>
+import {  postThumbsUp, deleteThumbsUp } from '@/api/thumbsUp'
 import { Tab, Tabs, Icon, List } from 'vant';
 import Vue from 'vue'
 Vue.use(Tab).use(Tabs).use(Icon).use(List);
@@ -72,28 +86,51 @@ export default {
         offset: 0
       },
       comments: [],
-      finished: false
+      finished: false,
     }
   },
 
   methods: {
+    // 点赞
+    onThumbUp(commentId){
+      if(this.$store.getters.guserid){
+        let comment = this.comments.find(item => item.id == commentId);
+        if(comment.isThumbUp){
+          deleteThumbsUp({commentId, userid: this.$store.getters.guserid}).then(() => {
+            comment.isThumbUp = !comment.isThumbUp;
+            comment.thumbsCount -= 1;
+          });
+        }else{
+          postThumbsUp({commentId, userid: this.$store.getters.guserid}).then(() => {
+            comment.isThumbUp = !comment.isThumbUp;
+            comment.thumbsCount += 1;
+          })
+        }
+      }else{
+        this.$router.push('/loginPage');
+      }
+      
+    },
     // 通过截取字符串获取pic里的第一张照片作为封面
     getFirstPic(obj){
-      let pics = obj.comments[0].pics;
+      let pics = obj.pics;
       let index = pics.indexOf(',');
       if(index == -1){
-        obj.comments[0].firstPic = obj.comments[0].pics;
+        obj.firstPic = obj.pics;
       }else{
-        obj.comments[0].firstPic = obj.comments[0].pics.substring(0, index);
+        obj.firstPic = obj.pics.substring(0, index);
       }
     },
+    // 重载
     onLoad(){
       this.page.offset += 1;
       this.load();
     },
+    // 跳转到详情页
     onTurnToTab(commentId){
       this.$router.push({ name: 'tabDetail', params: { commentId }})
     },
+    // 加载
     load(){
       let query = `?limit=${this.page.limit}&offset=${this.page.offset}`;
       this.$store.dispatch(types.AComments, query).then(res => {

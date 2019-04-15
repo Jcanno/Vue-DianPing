@@ -99,7 +99,7 @@ export default {
 
   computed: {
     discusses(){
-      return this.$store.state.comment.comment.comments[0].discusses;
+      return this.$store.state.comment.comment.discusses;
     }
   },
 
