@@ -3,9 +3,9 @@ import axios from '@/libs/request'
 /**
  * 登录
  */
-export const login = (data) =>{
+export const postLogin = (data) =>{
     return axios.request({
-        url: `user/login`,
+        url: `login`,
         method: 'post',
         data
     })
@@ -14,9 +14,9 @@ export const login = (data) =>{
 /**
  * 注册
  */
-export const register = (data) =>{
+export const postRegister = (data) =>{
   return axios.request({
-      url: `user/register`,
+      url: `register`,
       method: 'post',
       data
   })
@@ -25,9 +25,9 @@ export const register = (data) =>{
 /**
  * 更新用户信息
  */
-export const userInfo = (data) =>{
+export const patchUserInfo = (data) =>{
     return axios.request({
-        url: `user/userinfo/${data.id}`,
+        url: `userinfo/${data.id}`,
         method: 'patch',
         data
     })
@@ -38,7 +38,7 @@ export const userInfo = (data) =>{
  */
 export const getUserInfo = (id) =>{
     return axios.request({
-        url: `user/userinfo/${id}`,
+        url: `userinfo/${id}`,
         method: 'get',
     })
   }

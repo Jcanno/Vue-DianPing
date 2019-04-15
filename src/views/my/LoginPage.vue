@@ -13,13 +13,13 @@
       <van-icon 
         name="cross"
         size="20px"
-        @click="closePop"
+        @click="onGoBack"
         class="close"
       />
       <component 
         :is="current"
-        @onLogin="handleLogin"
-        @onRegister="handleRegister"
+        @login="handleLogin"
+        @register="handleRegister"
         class="com"
       />
       <p 
@@ -28,7 +28,7 @@
       >
         没有账号？
         <span 
-          @click="transRegister"
+          @click="switchRegister"
         >
           注册
         </span> 
@@ -40,7 +40,7 @@
       >
         已有账号？点击
         <span 
-          @click="transLogin"
+          @click="switchLogin"
         >
           登录！
         </span>
@@ -53,9 +53,17 @@
 import * as types from '@/store/types'
 import Login from './components/Login'
 import Register from './components/Register'
-import { Icon, Button, Popup, Toast } from 'vant';
 import Vue from 'vue';
-Vue.use(Icon).use(Button).use(Popup).use(Toast);
+import { 
+  Icon, 
+  Button, 
+  Popup, 
+  Toast 
+} from 'vant';
+Vue.use(Icon)
+   .use(Button)
+   .use(Popup)
+   .use(Toast);
 export default {
   name: 'loginpage',
 
@@ -77,19 +85,19 @@ export default {
   },
 
   methods: {
-    closePop(){
+    onGoBack(){
       this.$router.go(-1)
     },
-    transRegister(){
+    switchRegister(){
       this.current = Register;
     },
-    transLogin(){
+    switchLogin(){
       this.current = Login;
     },
     handleLogin(data){
       this.$store.dispatch(types.ALogin, data).then(() => {
         Toast('登录成功!')
-        this.$router.push('/my')
+        this.$router.go(-1)
       }); 
     },
     handleRegister(data){

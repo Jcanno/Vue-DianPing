@@ -4,7 +4,12 @@
 
 <template>
   <div class="user-tab">
-    <img v-for="item in images" :key="item" :src="item" alt="">
+    <img 
+      v-for="item in images" 
+      :key="item" 
+      :src="item" 
+      alt=""
+    >
   </div>
 </template>
 

@@ -18,20 +18,18 @@
     </van-nav-bar>
     <UserCom 
       class="user-com"
-      @onPopLogin="handlePopLogin"
-      :isLogin="isLogin"
-      :user="user"
     />
     
-    <UserTab></UserTab>
+    <UserTab />
   </div>
 </template>
 
 <script>
+import * as types from '@/store/types';
 import UserCom from './components/UserCom'
 import UserTab from './components/UserTab'
-import { Popup, NavBar, Icon } from 'vant';
 import Vue from 'vue';
+import { Popup, NavBar, Icon } from 'vant';
 Vue.use(Popup).use(NavBar).use(Icon);
 export default {
   name: 'my',
@@ -48,17 +46,9 @@ export default {
   },
 
   methods: {
-    // handlePopLogin(){
-    //   this.show = true;
-    // },
-    // handleClosePop(){
-    //   this.show = false;
-    // }
+    // 跳转到设置界面
     onSetting(){
       this.$router.push('/setting');
-    },
-    handlePopLogin(){
-      this.$router.push('/loginPage');
     },
   },
   
@@ -73,7 +63,7 @@ export default {
   },
 
   mounted(){
-    
+    this.$store.dispatch(types.AUserInfo);
   }
 }
 </script>

@@ -1,5 +1,5 @@
 import * as types from '../types'
-import { login, register, getUserInfo } from '@/api/user'
+import { postLogin, postRegister, getUserInfo } from '@/api/user'
 
 
 export default {
@@ -9,11 +9,20 @@ export default {
   },
 
   getters: {
+    // 获取用户id
     [types.GUserid](state){
       if(state.user.userid){
         return state.user.userid;
       }else{
         return 0;
+      }
+    },
+    // 获取登录状态
+    [types.GLoginState](state){
+      if(state.isLogin){
+        return true;
+      }else{
+        return false;
       }
     }
   },
@@ -34,6 +43,9 @@ export default {
   },
 
   actions: {
+    /**
+     * 获取用户信息
+     */
     [types.AUserInfo]({ getters, commit }){
       return new Promise( (resolve, reject) => {
         getUserInfo(getters.guserid).then(res => {
@@ -45,9 +57,12 @@ export default {
         })
       })
     },
+    /**
+     * 登录
+     */
     [types.ALogin]({commit}, data){
       return new Promise( (resolve, reject) => {
-        login(data).then(res => {
+        postLogin(data).then(res => {
           commit(types.MUserInfo, res.data);
           commit(types.MLoginState, true);
           resolve(res.data)
@@ -58,10 +73,13 @@ export default {
         })
       })
     },
-    // eslint-disable-next-line
+    /**
+     * 注册用户
+     */
+    // eslint-disable-next-line 
     [types.ARegister]({}, data){
       return new Promise( (resolve, reject) => {
-        register(data).then(res => {
+        postRegister(data).then(res => {
           resolve(res)
         }).catch(err => {
           reject(err)

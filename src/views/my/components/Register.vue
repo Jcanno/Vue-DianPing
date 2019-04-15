@@ -26,7 +26,7 @@
     <van-button 
       class="login-button"
       round
-      @click="checkRegister"
+      @click="onRegister"
     >
       注册
     </van-button>
@@ -52,11 +52,12 @@ export default {
   },
 
   methods: {
-    checkRegister(){
+    // 判断值并注册用户
+    onRegister(){
       if(this.nickname == "" || this.username == "" || this.password == ""){
         Toast("请输入注册信息！")
       }else{
-        this.$emit('onRegister', {
+        this.$emit('register', {
           nickname: this.nickname,
           username: this.username,
           password: this.password

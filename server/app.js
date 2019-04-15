@@ -108,7 +108,7 @@ app.use('/', thumbUp);
 app.use('/', discuss);
 app.use('/', fan);
 app.use('/', upload);
-app.use('/user', user);
+app.use('/', user);
 app.use('/', comment);
 
 

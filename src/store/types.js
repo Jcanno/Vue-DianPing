@@ -25,3 +25,4 @@ export const MComment = 'mcomment'
 *getters 
 */
 export const GUserid = 'guserid'
+export const GLoginState = 'gloginstate'

@@ -3,11 +3,19 @@ const router = express.Router()
 const User = require('../models/User')
 const bcrypt = require("bcrypt")
 
+
+/**
+ * 注册接口
+ */
 router.post('/register', (req, res) => {
-  console.log(req.body);
+  const { 
+    username, 
+    password, 
+    nickname 
+  } = req.body;
   User.findOne({
     where: {
-      username: req.body.username
+      username
     }
   }).then(user => {
     if(user){
@@ -15,13 +23,13 @@ router.post('/register', (req, res) => {
     }else{
       // 进行密码加密处理
       bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(req.body.password, salt, function(err, hash) {
+        bcrypt.hash(password, salt, function(err, hash) {
             // Store hash in your password DB.
             if(err) throw err;
             User.create({
-              username: req.body.username,
+              username,
               password: hash,
-              nickname: req.body.nickname
+              nickname
             }).then(newUser => {
               res.status(201).json(newUser)
             }).catch(err => {
@@ -33,10 +41,12 @@ router.post('/register', (req, res) => {
   })
 })
 
-router.post('/login', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
 
+/**
+ * 登录接口
+ */
+router.post('/login', (req, res) => {
+  const { username, password } = req.body;
   User.findOne({
     where: {
       username
@@ -47,9 +57,9 @@ router.post('/login', (req, res) => {
     }else{
       bcrypt.compare(password, user.password).then(isMatch => {
         if(isMatch){
-          res.status(200).json(user)
+          res.status(201).json(user);
         }else{
-          return res.status(400).json({msg: "密码错误!"})
+          res.status(400).json({msg: "密码错误!"});
         }
       })
     }
@@ -57,8 +67,13 @@ router.post('/login', (req, res) => {
 })
 
 
-router.patch('/userinfo/:id', (req, res) => {
-  const userid = req.params.id;
+
+/**
+ * 更改用户信息接口
+ * @param userid  用户id
+ */
+router.patch('/userinfo/:userid', (req, res) => {
+  const { userid } = req.params;
   User.findOne({
     where: {
       userid
@@ -74,15 +89,20 @@ router.patch('/userinfo/:id', (req, res) => {
   })
 })
 
-router.get('/userinfo/:id', (req, res) => {
-  const userid = req.params.id;
+/**
+ * 获取用户信息接口
+ * @param userid  用户id
+ */
+
+router.get('/userinfo/:userid', (req, res) => {
+  const { userid } = req.params;
   User.findOne({
     where: {
       userid
     }
   }).then(user => {
     if(!user){
-      return res.status(404).json({msg: '用户不存在！'})
+      res.status(404).json({msg: '用户不存在！'})
     }else{
       res.status(200).json(user);
     }

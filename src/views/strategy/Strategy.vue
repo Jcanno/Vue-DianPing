@@ -6,7 +6,7 @@
   <div class="strategy">
     <img class="strategy-img" :src="city" alt="">
     <div class="strategy-item">
-      <p>温州必体验</p>
+      <p>上海必体验</p>
       <img  class="strategy-item-img" :src="hashiqi1" alt="">
     </div>
     <StrategyItem></StrategyItem>

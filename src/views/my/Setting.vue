@@ -8,7 +8,7 @@
       <van-icon 
         name="cross"
         size="20px"
-        @click="closePop"
+        @click="onGoBack"
         class="close"
       />
       <van-cell-group class="group">
@@ -26,7 +26,6 @@
         <van-cell title="昵称" >
           <van-field
             v-model="nickname"
-            
             placeholder="请输入昵称"
           >
             <van-button 
@@ -34,7 +33,8 @@
               size="small" 
               type="primary"
               @click="onSave"
-            >保存</van-button>
+            >保存
+            </van-button>
           </van-field>
         </van-cell>
         <van-cell >
@@ -53,11 +53,23 @@
 <script>
 import * as types from '@/store/types';
 import { uploadSingle } from '@/api/upload'
-import { userInfo } from '@/api/user'
+import { patchUserInfo } from '@/api/user'
 import Avatar from '_c/UserInfo/Avatar'
-import { Cell, CellGroup, Popup, Uploader, Toast, Field } from 'vant';
 import Vue from 'vue';
-Vue.use(Cell).use(CellGroup).use(Popup).use(Uploader).use(Toast).use(Field);
+import { 
+  Cell, 
+  CellGroup, 
+  Popup, 
+  Uploader, 
+  Toast, 
+  Field 
+} from 'vant';
+Vue.use(Cell)
+   .use(CellGroup)
+   .use(Popup)
+   .use(Uploader)
+   .use(Toast)
+   .use(Field);
 export default {
   name: 'setting',
 
@@ -73,21 +85,27 @@ export default {
   },
 
   methods: {
+    // 退出登录
     onLogout(){
       this.$store.commit(types.MLoginState, false);
       this.$store.commit(types.MUserInfo, {});
       this.$router.go(-1);
     },
+    // 保存昵称
     onSave(){
       if(this.nickname == ""){
         Toast('请输入昵称');
       }else{
-        userInfo({nickname: this.nickname,id: this.$store.getters.guserid}).then(() => {
+        patchUserInfo({
+          nickname: this.nickname,
+          id: this.$store.getters.guserid
+        }).then(() => {
           Toast('更新成功!');
-          this.$store.dispatch(types.AUserInfo)
+          this.reload();  
         })
       }
     },
+    // 读取文件
     onRead(file){
       let data = new FormData();
       data.append('file', file.file);
@@ -96,13 +114,18 @@ export default {
           id: this.$store.getters.guserid,
           avatar: res.data.url
         }
-        userInfo(data).then(() => {
+        patchUserInfo(data).then(() => {
           Toast('更新成功!');
-          this.$store.dispatch(types.AUserInfo)
+          this.reload();       
         })
       })
     },
-    closePop(){
+    // 重载
+    reload(){
+      this.$store.dispatch(types.AUserInfo);
+    },
+    // 回退页面
+    onGoBack(){
       this.$router.go(-1)
     },
   },

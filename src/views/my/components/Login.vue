@@ -20,7 +20,7 @@
     <van-button 
       class="login-button"
       round
-      @click="checkLogin"
+      @click="onLogin"
     >
       登录
     </van-button>
@@ -45,11 +45,12 @@ export default {
   },
 
   methods: {
-    checkLogin(){
+    // 判断值并传递登录信息
+    onLogin(){
       if(this.password == "" || this.username == ""){
         Toast("请输入用户名或者密码！")
       }else {
-        this.$emit('onLogin', {
+        this.$emit('login', {
           username: this.username,
           password: this.password
         })
