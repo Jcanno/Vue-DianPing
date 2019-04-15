@@ -11,7 +11,7 @@
     />
     <div class="user-info">
       <p class="username">{{user.nickname}}</p>
-      <p><span class="divide">粉丝  0  </span><span>关注  0</span></p>
+      <p><span class="divide">粉丝  {{user.fansCount}}  </span><span>关注  {{user.followsCount}}</span></p>
     </div>   
   </div>
   <div class="user-login" v-else @click="onGotoLogin">

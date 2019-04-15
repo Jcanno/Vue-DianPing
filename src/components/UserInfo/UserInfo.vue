@@ -7,7 +7,7 @@
     <Avatar 
       :size=40 
       class="avatar"
-      :image="comment.avatar"
+      :image="comment.user.avatar"
     />
     <UserDate
       :nickname="comment.user.nickname"

@@ -2,7 +2,7 @@ const express = require("express")
 const router = express.Router()
 const User = require('../models/User')
 const bcrypt = require("bcrypt")
-
+const Fans = require('../models/Fans')
 
 /**
  * 注册接口
@@ -100,10 +100,25 @@ router.get('/userinfo/:userid', (req, res) => {
       userid
     }
   }).then(user => {
-    if(!user){
+    if(!user){    
       res.status(404).json({msg: '用户不存在！'})
     }else{
-      res.status(200).json(user);
+      let newuser = user.toJSON();
+      Fans.count({
+        where: {
+          fanid: userid
+        }
+      }).then(followsCount => {
+        newuser.followsCount = followsCount;
+        Fans.count({
+          where: {
+            userid
+          }
+        }).then(fansCount => {
+          newuser.fansCount = fansCount;
+          res.status(200).json(newuser);
+        })
+      })
     }
   })
 })

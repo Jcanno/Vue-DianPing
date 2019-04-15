@@ -4,21 +4,21 @@
 
 <template>
   <div class="item">
-    <FollowItem 
+    <!-- <FollowItem 
       v-for="index in 3"
       :key="index"
       class="follow-item"
-    ></FollowItem>
+    ></FollowItem> -->
   </div>
 </template>
 
 <script>
-import FollowItem from './components/FollowItem'
+// import FollowItem from './components/FollowItem'
 export default {
   name: 'follow',
 
   components:{
-    FollowItem
+    // FollowItem
   },
 
   data () {
