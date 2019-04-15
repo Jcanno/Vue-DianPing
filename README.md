@@ -5,6 +5,7 @@
 * Vuex
 * Vue-Router
 * Vue-Cli
+* Vant
 * Express
 * Sequelize
 * PostgreSql
@@ -41,3 +42,4 @@ npm run build
 * [Express](https://cli.vuejs.org/zh/)
 * [Vue-Router](https://router.vuejs.org/zh/guide/)
 * [Vuex](https://vuex.vuejs.org/zh/)
+* [Vant](https://youzan.github.io/vant/#/zh-CN/intro)
