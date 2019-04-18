@@ -8,7 +8,7 @@
 * Vant
 * Express
 * Sequelize
-* PostgreSql
+* PostgreSQL
 
 
 ## 实现功能:
@@ -25,7 +25,7 @@ cd Vue-DianPing
 npm install
 ```
 
-## 运行编译程序（同时运行前端和服务端）
+## 运行调试程序（同时运行前端和服务端）
 ```
 npm run serve
 ```
