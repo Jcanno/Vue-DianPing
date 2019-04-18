@@ -35,7 +35,7 @@ npm run serve
 npm run build
 ```
 
-### 示例所用node.js的orm框架sequelize,数据库postgreSql,数据库配置在'/server/config/dbConfig'中
+### 示例所用node.js的orm框架sequelize,数据库postgreSQL,数据库配置在`'/server/config/dbConfig'`中
 ### 参考文档  
 * [Sequelize](https://github.com/demopark/sequelize-docs-Zh-CN)
 * [Vue-Cli](https://cli.vuejs.org/zh/)
