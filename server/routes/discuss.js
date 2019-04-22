@@ -8,7 +8,6 @@ const Discusses = require('../models/Discusses')
  * @param commentId  评论id
  */
 router.post('/discusses/:commentId', (req, res) => {
-  console.log(req.body);
   const { commentId } = req.params;
   const { userid, avatar, nickname, discuss } = req.body;
   Discusses.create({

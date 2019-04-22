@@ -32,8 +32,8 @@ router.post('/register', (req, res) => {
               nickname
             }).then(newUser => {
               res.status(201).json(newUser)
-            }).catch(err => {
-              console.log(err);              
+            }).catch(() => {
+          
             })
         });
       });

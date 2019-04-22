@@ -5,8 +5,10 @@ const bodyParser = require("body-parser")
 const db = require('./db')
 const path = require('path')
 db.authenticate().then(() => {
+  // eslint-disable-next-line
   console.log('数据库连接成功！');
 }).catch( err => {
+  // eslint-disable-next-line
   console.error('数据库连接失败！',err);
 })
 
@@ -41,5 +43,6 @@ app.use('/static', express.static(path.join(__dirname, 'files')))
 app.use('/upload', express.static(path.join(__dirname, 'uploads')))
 
 app.listen(port, () => {
+  // eslint-disable-next-line
   console.log("服务已启动，监听端口3000!");
 });

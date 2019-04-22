@@ -99,8 +99,10 @@ function thumbCount(comment, userid){
         }else{
           comment.isThumbUp = false;
         }
-        res(comment)
+        res(comment);
       })  
+    }).catch(err => {
+      rej(err);
     })
   })
 }

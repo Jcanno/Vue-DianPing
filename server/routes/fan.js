@@ -10,7 +10,6 @@ const User = require('../models/User')
  * @param userid 用户id
  */
 router.post('/fans/:fanid/:userid', (req, res) => {
-  console.log(req.body);
   const { userid, fanid } = req.params;
 
   User.findOne({
