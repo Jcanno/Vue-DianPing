@@ -1,5 +1,10 @@
 # vue-dianping 仿大众点评Vue项目
 
+![login](https://github.com/Jcanno/Vue-DianPing/blob/master/gif/login.gif)
+![comment](https://github.com/Jcanno/Vue-DianPing/blob/master/gif/comment.gif)
+![discuss](https://github.com/Jcanno/Vue-DianPing/blob/master/gif/discuss.gif)
+
+
 ## 技术栈:
 * Vue
 * Vuex
